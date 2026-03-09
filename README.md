@@ -1,5 +1,5 @@
 # Neural Networks AI — Thesis Project
-Live: [](https://sariidouuu.github.io/Neural-Networks-AI/frontend/index.html)
+Live: [Neural-Networks-AI](https://sariidouuu.github.io/Neural-Networks-AI/frontend/index.html)
 
 A comprehensive Full-Stack Web Application featuring a custom Neural Network trained to provide intelligent responses regarding "Machine Learning" and "Neural Networks" course theory.
 
