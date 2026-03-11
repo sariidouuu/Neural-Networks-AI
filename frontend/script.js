@@ -2,7 +2,8 @@ const chatArea    = document.getElementById('chat-area');
 const promptInput = document.getElementById('prompt-input');
 
 /* ────── SEND THE PROMPT ────── */
-function handleSend() {
+// We use async so the chat will be able to wait for the answer
+async function handleSend() {
     const text = promptInput.value.trim();
     //trim: removes whitespace from both ends of a string. So if the user types only spaces, it will be considered empty and won't be sent as a prompt.
     if (!text) return;
@@ -13,10 +14,13 @@ function handleSend() {
     promptInput.style.height = 'auto';
 
     // Small delay to simulate AI "thinking"
-    setTimeout(() => {
+    /*setTimeout(() => {
         const response = getAIResponse(text);
         addMessage(response, 'answer');
-    }, 400);
+    }, 400);*/
+    // Using await the code awaits the answer from the server
+    const response = await getAIResponse(text);
+    addMessage(response, 'answer');
 }
 
 
@@ -133,11 +137,36 @@ function updateModelSelection() {
 
 
 /* ────── AI RESPONSE BASED ON SELECTED MODEL ────── */
+async function getAIResponse(userPrompt) {
+    
+    if (selectedModel === '1') { 
+        //return model1.predict(userPrompt); 
+        return "I'm sorry, can't process your request. I'm not trained yet.";
+    }
+    if (selectedModel === '2') { 
+        try {
+            // We POST request on our local server (app.py)
+            const response = await fetch('http://127.0.0.1:5000/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json' // We inform our server that we send them the JSON file
+                },
+                body: JSON.stringify({ message: userPrompt }) // We "package" the question
+            });
 
-// Replace this function with your trained model's API call in the future
-function getAIResponse(userPrompt) {
-    // When we train the models, replace this with API calls to get the response from the selected model
-    // if (selectedModel === '1') { return model1.predict(userPrompt); }
-    // if (selectedModel === '2') { return model2.predict(userPrompt); }
-    return "I'm sorry, can't process your request. I'm not trained yet.";
+            // We open the answer package 
+            const data = await response.json();
+
+            // If the server sent us back the "reply", we return it to the chat
+            if (data.reply) {
+                return data.reply;
+            } else {
+                return "Error: " + (data.error || "SOmething went wrong with API.");
+            }
+        } catch (error) {
+            console.error("Fetch error:", error);
+            return "Connection error: Make sure the app.py runs on your terminal!";
+        }
+    }
+    
 }
