@@ -14,9 +14,24 @@ CORS(app)
 # Setting up the Gemini API with our key
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-# We choose the Google model
+# We choose the Google model and pass the system instructions. 
+# The restrictions we impose to google ai studio:
+instructions = """
+STRICT OPERATING PROTOCOL:
+1. You must answer ONLY in English.
+2. You are the specialized assistant for Olga's bachelor thesis on "Neural Networks".
+3. YOU ARE STRICTLY FORBIDDEN to answer questions that are not related to Artificial Intelligence, Mathematics, or Programming (Python).
+4. If the user asks about irrelevant topics (e.g., cooking, politics, sports), you must reply exactly with this phrase: "I'm sorry, but my knowledge is strictly limited to the scope of this Neural Networks thesis."
+5. Do not provide general information unless explicitly asked. Focus on technical details regarding MLPs, CNNs, Backpropagation, Activation Functions, and anything else strictly related to Neural Networks and Machine Learning.
+6. If you are asked to provide code, use ONLY the PyTorch or NumPy libraries.
+7. Keep your answers short and concise.
+"""
+
 # We can send about 15 questions/minute and 1000/day
-model = genai.GenerativeModel(model_name="gemini-2.5-flash-lite")
+model = genai.GenerativeModel(
+    model_name="gemini-2.5-flash-lite",
+    system_instruction=instructions
+    )
 
 @app.route('/chat', methods=['POST'])
 def chat():
