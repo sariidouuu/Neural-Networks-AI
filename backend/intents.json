@@ -1,0 +1,1210 @@
+{
+    "intents": [
+
+        {
+        "tag": "greeting",
+        "patterns": [
+            "Hello", "Hi", "Hey", "Good morning", "Good afternoon", "Good evening",
+            "Hi there", "Hey there", "Howdy", "Greetings", "What's up", "Sup",
+            "Hello there", "Hi bot", "Hey bot", "Hello bot"
+        ],
+        "responses": [
+            "Hello! I'm NeuralBot, your AI assistant for Machine Learning and Neural Networks. How can I help you today?",
+            "Hi there! Ready to explore Machine Learning and Neural Networks together?",
+            "Hey! I'm here to help you with anything related to Machine Learning and Neural Networks. What would you like to know?",
+            "Hello! Ask me anything about ML algorithms, neural networks, or deep learning!"
+        ]
+        },
+
+        {
+        "tag": "goodbye",
+        "patterns": [
+            "Bye", "Goodbye", "See you", "See you later", "Take care", "Farewell",
+            "Good night", "I'm leaving", "That's all", "Thanks, bye", "Bye bye",
+            "Have a good day", "Talk later", "Exit", "Quit"
+        ],
+        "responses": [
+            "Goodbye! Keep learning and building great models!",
+            "See you later! Don't forget to tune those hyperparameters!",
+            "Farewell! Good luck with your Machine Learning journey!",
+            "Bye! Feel free to come back whenever you have more ML questions!"
+        ]
+        },
+
+        {
+        "tag": "thanks",
+        "patterns": [
+            "Thanks", "Thank you", "Thank you so much", "Thanks a lot", "Many thanks",
+            "Appreciate it", "That was helpful", "Great answer", "Perfect", "Awesome",
+            "Cheers", "Nice one", "Helpful", "That helps", "I got it", "Got it, thanks"
+        ],
+        "responses": [
+            "You're welcome! Glad I could help!",
+            "Happy to help! Let me know if you have more questions.",
+            "Anytime! Machine Learning is a fascinating topic — keep exploring!",
+            "No problem at all! Feel free to ask anything else about ML or neural networks."
+        ]
+        },
+
+        {
+        "tag": "identity",
+        "patterns": [
+            "Who are you", "What are you", "What is your name", "Tell me about yourself",
+            "Are you a bot", "Are you an AI", "What can you do", "What do you know",
+            "What topics do you cover", "What are you specialized in",
+            "What is your purpose", "Introduce yourself", "Who made you"
+        ],
+        "responses": [
+            "I'm NeuralBot, an AI assistant specialized in Machine Learning and Neural Networks. I can help you understand algorithms, concepts, architectures, and much more!",
+            "I'm an AI chatbot built to answer questions about Machine Learning and Neural Networks — from basic concepts like supervised learning to advanced topics like autoencoders and CNNs.",
+            "I'm NeuralBot! My expertise covers supervised and unsupervised learning, neural network architectures, deep learning, and evaluation metrics. What would you like to explore?"
+        ]
+        },
+
+        {
+        "tag": "help",
+        "patterns": [
+            "Help", "Help me", "I need help", "What can you help with",
+            "What should I ask", "Give me topics", "Show me what you know",
+            "What can I ask you", "Menu", "Options", "Guide me", "I don't know where to start"
+        ],
+        "responses": [
+            "I can help you with: Machine Learning algorithms (classification, regression, clustering), Neural Networks (perceptron, MLP, CNNs, autoencoders), evaluation metrics, overfitting, regularization, dimensionality reduction, and much more! Just ask!",
+            "Here are some things you can ask me about: supervised vs unsupervised learning, decision trees, SVMs, neural network training, backpropagation, activation functions, autoencoders, convolutional neural networks, and evaluation metrics. Where would you like to start?",
+            "I'm here to help with ML and Neural Networks! Ask me about specific algorithms, concepts like overfitting, how to train a neural network, what loss functions are, and many more topics!"
+        ]
+        },
+
+        {
+        "tag": "supervised_vs_unsupervised",
+        "patterns": [
+            "What is supervised learning", "What is unsupervised learning",
+            "Difference between supervised and unsupervised",
+            "Supervised vs unsupervised learning",
+            "Explain supervised learning", "Explain unsupervised learning",
+            "What are the types of machine learning",
+            "What is the difference between supervised and unsupervised"
+        ],
+        "responses": [
+            "Supervised learning uses labeled data — the model learns from input-output pairs to predict the class or value of new samples (e.g., classification, regression). Unsupervised learning finds hidden structures in unlabeled data without labels (e.g., clustering, dimensionality reduction).",
+            "In supervised learning, each training example has a label and the model learns to map inputs to outputs. In unsupervised learning there are no labels — the model discovers patterns on its own, like grouping similar data points.",
+            "Supervised learning: labeled data, clear objective (predict output). Unsupervised learning: no labels, discover hidden structure. A third type is reinforcement learning, where an agent learns through rewards and penalties by interacting with an environment."
+        ]
+        },
+
+        {
+        "tag": "parametric_vs_nonparametric",
+        "patterns": [
+            "What is a parametric model", "What is a non-parametric model",
+            "Parametric vs non-parametric", "Difference between parametric and non-parametric",
+            "Explain parametric models", "Explain non-parametric models",
+            "What does parametric mean in machine learning"
+        ],
+        "responses": [
+            "Parametric models have a fixed number of parameters regardless of the amount of training data (e.g., Linear Regression, Logistic Regression, Naive Bayes). Non-parametric models grow in complexity with the data — they make fewer assumptions about the data's form (e.g., kNN, Decision Trees, SVMs).",
+            "Parametric models assume a specific functional form and learn a fixed set of parameters. They are fast at prediction but require correct assumptions about the data. Non-parametric models are more flexible and accurate on complex data but slower and more memory-intensive.",
+            "Examples — Parametric: Linear Regression, Logistic Regression, Naive Bayes, K-Means, GMM. Non-parametric: kNN, Decision Trees, Random Forests, SVMs, DBSCAN, PCA. The key distinction: parametric models have a fixed number of parameters; non-parametric models let complexity grow with data."
+        ]
+        },
+
+        {
+        "tag": "knn",
+        "patterns": [
+            "What is kNN", "Explain kNN", "How does kNN work",
+            "What is k-nearest neighbors", "k nearest neighbors algorithm",
+            "When to use kNN", "kNN classification", "kNN regression",
+            "What is instance-based learning", "What is the k in kNN",
+            "How to choose k in kNN"
+        ],
+        "responses": [
+            "kNN (k-Nearest Neighbors) is a non-parametric, instance-based algorithm. For classification, it assigns the majority class among the k nearest training points. For regression, it predicts the average value of the k nearest neighbors. It stores the entire training set and makes no assumptions about the data distribution.",
+            "kNN works by measuring the distance between the query point and all training points (e.g., Euclidean distance), finding the k closest ones, and returning the majority vote (classification) or average (regression). It is simple but slow at prediction — O(n) per query — and requires feature scaling.",
+            "Key properties of kNN: non-parametric (no fixed parameters), instance-based (memorizes training data), sensitive to feature scale (always normalize), slow for large datasets. Choosing k: small k = overfitting, large k = underfitting. Use cross-validation to find the optimal k."
+        ]
+        },
+
+        {
+        "tag": "decision_tree",
+        "patterns": [
+            "What is a decision tree", "Explain decision trees",
+            "How does a decision tree work", "What is tree depth",
+            "Decision tree overfitting", "What is pruning in decision trees",
+            "What is Gini impurity", "What is information gain",
+            "Decision tree splitting criteria", "When to use decision trees"
+        ],
+        "responses": [
+            "A Decision Tree builds a tree-like model of decisions. At each node, it splits data based on the feature that best separates the classes (using Gini Impurity or Information Gain). Leaf nodes contain the final predictions. It is non-parametric, non-linear, and highly interpretable.",
+            "Decision Trees tend to overfit if grown too deep — increasing depth cannot increase training error but can lead to overfitting. Solutions: limit max_depth, set min_samples_split, or prune the tree. Decision Trees are the building blocks of Random Forests and Gradient Boosting.",
+            "Splitting criteria: Gini Impurity measures class mixing (lower is better). Information Gain / Entropy measures reduction in uncertainty. Decision Trees handle numerical and categorical data, need no feature scaling, and capture non-linear relationships. They are non-parametric and non-linear."
+        ]
+        },
+
+        {
+        "tag": "random_forest",
+        "patterns": [
+            "What is random forest", "Explain random forest",
+            "How does random forest work", "Random forest vs decision tree",
+            "Why is random forest better than a single tree",
+            "What is feature importance in random forest",
+            "Random forest classification", "Random forest regression",
+            "What is bootstrap sampling in random forest"
+        ],
+        "responses": [
+            "Random Forest is an ensemble of Decision Trees, each trained on a random bootstrap sample of data (bagging) and using a random subset of features at each split. Final prediction is majority vote (classification) or average (regression). This reduces variance and overfitting compared to a single tree.",
+            "Random Forest introduces two levels of randomness: random data subsets (bootstrap sampling) and random feature subsets at each split. Diverse trees make different errors that cancel out when aggregated. It also computes feature importance scores based on how much each feature reduces impurity across all trees.",
+            "Key advantages: resistant to overfitting, handles high-dimensional data, provides feature importance, works well out of the box. It is non-parametric and non-linear. One of the most reliable general-purpose algorithms — a great default choice before trying more complex models."
+        ]
+        },
+
+        {
+        "tag": "logistic_regression",
+        "patterns": [
+            "What is logistic regression", "Explain logistic regression",
+            "How does logistic regression work", "Logistic regression vs linear regression",
+            "What does logistic regression output", "Is logistic regression parametric",
+            "What is the sigmoid in logistic regression", "Logistic regression for binary classification"
+        ],
+        "responses": [
+            "Logistic Regression is a parametric, linear classification algorithm that models the probability of a class. It applies the sigmoid function to a linear combination of features to output a value between 0 and 1, interpreted as a probability. Despite its name, it is a classifier, not a regressor.",
+            "Logistic Regression outputs P(y=1|x) = σ(β0 + β1·x1 + ...) where σ is the sigmoid function. If the probability exceeds a threshold (usually 0.5), it predicts class 1. It is trained by minimizing Binary Cross-Entropy. It is parametric and has a linear decision boundary.",
+            "Logistic Regression is simple, interpretable, and works well when data is linearly separable. For multi-class problems, use Softmax Regression (multinomial logistic regression). It is parametric and linear — a good baseline for any classification task."
+        ]
+        },
+
+        {
+        "tag": "naive_bayes",
+        "patterns": [
+            "What is Naive Bayes", "Explain Naive Bayes",
+            "How does Naive Bayes work", "Why is Naive Bayes naive",
+            "Naive Bayes for text classification", "What is the independence assumption in Naive Bayes",
+            "When to use Naive Bayes", "Is Naive Bayes parametric"
+        ],
+        "responses": [
+            "Naive Bayes is a parametric, probabilistic classifier based on Bayes' theorem. It assumes all features are conditionally independent given the class label — which is rarely true, hence 'naive'. Despite this strong assumption, it performs surprisingly well, especially for text classification (spam detection, sentiment analysis).",
+            "Naive Bayes computes: P(class|features) ∝ P(class) × P(f1|class) × P(f2|class) × ... and predicts the class with the highest posterior probability. It is fast, works well with small data, and handles high-dimensional text effectively.",
+            "Naive Bayes is parametric and linear. Variants: Gaussian NB (continuous features), Multinomial NB (word counts), Bernoulli NB (binary features). Its main weakness is the feature independence assumption — highly correlated features can hurt performance."
+        ]
+        },
+
+        {
+        "tag": "svm",
+        "patterns": [
+            "What is SVM", "Explain SVM", "What is a support vector machine",
+            "How does SVM work", "What is a hyperplane in SVM",
+            "What is the margin in SVM", "What is a support vector",
+            "What is hard margin SVM", "What is soft margin SVM",
+            "When to use SVM", "SVM for classification"
+        ],
+        "responses": [
+            "SVM (Support Vector Machine) finds the hyperplane that maximizes the margin between two classes. The margin is the distance between the hyperplane and the nearest data points from each class — those nearest points are called support vectors. Hard-margin requires perfectly linearly separable data; soft-margin allows some misclassifications for better generalization.",
+            "SVM is non-parametric (complexity depends on number of support vectors, not features). It works well in high-dimensional spaces and when features outnumber samples. Feature scaling is required since SVM is distance-based. The soft-margin parameter C controls the tradeoff between margin size and classification error.",
+            "SVM is a powerful classifier for small to medium datasets. For non-linear data, use kernel SVM (RBF, Polynomial). SVR (Support Vector Regression) applies the same principles to regression. SVM can be slow for very large datasets — consider Linear SVM (LinearSVC) or SGD-based linear models for scale."
+        ]
+        },
+
+        {
+        "tag": "kernel_trick",
+        "patterns": [
+            "What is the kernel trick", "Explain the kernel trick",
+            "What is an RBF kernel", "What is a polynomial kernel",
+            "What is a linear kernel", "Kernels in SVM",
+            "How does kernel SVM work", "Non-linear SVM",
+            "Why use kernels in SVM", "What is a kernel function"
+        ],
+        "responses": [
+            "The kernel trick allows SVM to handle non-linear data by implicitly mapping it to a higher-dimensional space where it becomes linearly separable — without explicitly computing the transformation. Common kernels: Linear (linearly separable data), Polynomial (degree-d curves), RBF/Gaussian (most popular for non-linear problems).",
+            "A kernel function K(x, y) computes the dot product in a high-dimensional space without performing the mapping explicitly. The RBF kernel K(x,y) = exp(-γ||x-y||²) maps data to infinite dimensions and is the most flexible — a good default for non-linear SVM.",
+            "Kernel choice: Linear kernel — fast, good for high-dimensional text data; Polynomial kernel — captures polynomial feature interactions; RBF/Gaussian — most flexible, best for unknown non-linear boundaries; Sigmoid kernel — similar to neural networks. Tune C (regularization) and γ (RBF width) using cross-validation."
+        ]
+        },
+
+        {
+        "tag": "linear_regression",
+        "patterns": [
+            "What is linear regression", "Explain linear regression",
+            "How does linear regression work", "What is the regression line",
+            "What are regression coefficients", "Is linear regression parametric",
+            "Linear regression formula", "When to use linear regression",
+            "Simple vs multiple linear regression"
+        ],
+        "responses": [
+            "Linear Regression models the relationship between input features and a continuous output as a linear function: y = β0 + β1·x1 + β2·x2 + ... It estimates coefficients β by minimizing Mean Squared Error (MSE). It is parametric and linear — assumes a straight-line (or hyperplane) relationship.",
+            "Simple Linear Regression: one feature, y = β0 + β1·x. Multiple Linear Regression: many features, y = β0 + β1·x1 + ... + βn·xn. Coefficients estimated via Ordinary Least Squares (OLS). Assumptions: linear relationship, independent errors, homoscedasticity, normally distributed residuals.",
+            "Linear Regression is the simplest, most interpretable regression model and a strong baseline for continuous prediction tasks. It is fast to train, easy to interpret (each coefficient shows the effect of that feature), but limited to linear relationships. Use Polynomial Regression or tree-based models for non-linear patterns."
+        ]
+        },
+
+        {
+        "tag": "ridge_regression",
+        "patterns": [
+            "What is Ridge regression", "Explain Ridge regression",
+            "What is L2 regularization in regression", "How does Ridge regression work",
+            "When to use Ridge regression", "Ridge regression formula",
+            "Ridge vs no regularization"
+        ],
+        "responses": [
+            "Ridge Regression adds an L2 penalty to the loss: Loss = MSE + λ·Σ(βi²). This shrinks all coefficients toward zero but never exactly to zero. It is useful when many features contribute a little — it keeps all of them but reduces their influence to prevent overfitting.",
+            "Ridge controls the tradeoff with λ: λ=0 means plain Linear Regression (no regularization); increasing λ increases shrinkage. Ridge is particularly effective when features are correlated (multicollinearity) — it distributes the coefficient values among correlated features rather than assigning all weight to one.",
+            "Ridge is parametric and linear. Use it when: all features are potentially relevant, multicollinearity is present, or you want a regularized linear model that keeps all features. If you also need feature selection (zero out irrelevant features), use Lasso instead."
+        ]
+        },
+
+        {
+        "tag": "lasso_regression",
+        "patterns": [
+            "What is Lasso regression", "Explain Lasso regression",
+            "What is L1 regularization in regression", "How does Lasso regression work",
+            "When to use Lasso", "Does Lasso do feature selection",
+            "Lasso regression formula", "Lasso vs Ridge"
+        ],
+        "responses": [
+            "Lasso Regression adds an L1 penalty to the loss: Loss = MSE + λ·Σ|βi|. Unlike Ridge, Lasso can shrink some coefficients exactly to zero, effectively removing those features from the model. This makes Lasso both a regression algorithm and a feature selection tool.",
+            "Lasso is ideal when you suspect only a few features are truly relevant and want a sparse, interpretable model. Higher λ means more coefficients are zeroed out. It is parametric and linear. Particularly useful in high-dimensional settings where many features are irrelevant.",
+            "Lasso vs Ridge: Lasso (L1) zeros out irrelevant features — good for sparse solutions and feature selection. Ridge (L2) keeps all features but shrinks them — better when all features contribute. ElasticNet combines both L1 and L2 penalties, balancing sparsity and stability."
+        ]
+        },
+
+        {
+        "tag": "xgboost",
+        "patterns": [
+            "What is XGBoost", "Explain XGBoost", "How does XGBoost work",
+            "What is gradient boosting", "XGBoost vs Random Forest",
+            "What is boosting in machine learning", "What is AdaBoost",
+            "When to use XGBoost", "XGBoost for classification", "XGBoost for regression"
+        ],
+        "responses": [
+            "XGBoost (Extreme Gradient Boosting) builds trees sequentially — each new tree corrects the errors of all previous trees by fitting the residuals. It uses gradient descent in function space to minimize a differentiable loss. It works for both classification and regression and is one of the strongest algorithms for tabular data.",
+            "XGBoost vs Random Forest: Random Forest builds trees in parallel (bagging, reduces variance), XGBoost builds them sequentially (boosting, reduces bias). XGBoost generally achieves higher accuracy but is more sensitive to hyperparameters. Both provide feature importance scores.",
+            "XGBoost advantages: very high accuracy on tabular data, handles missing values natively, built-in regularization (L1, L2), parallel computation, pruning. Key hyperparameters: n_estimators (number of trees), max_depth, learning_rate, subsample, colsample_bytree. Use early stopping with a validation set to avoid overfitting."
+        ]
+        },
+
+        {
+        "tag": "kmeans",
+        "patterns": [
+            "What is K-Means", "Explain K-Means", "How does K-Means work",
+            "What is a centroid", "K-Means algorithm steps",
+            "What is the elbow method for K-Means", "K-Means limitations",
+            "When to use K-Means", "Is K-Means parametric"
+        ],
+        "responses": [
+            "K-Means partitions data into K clusters by alternating: (1) Assign each point to the nearest centroid; (2) Recompute each centroid as the mean of its assigned points. Repeats until convergence. It minimizes intra-cluster variance (inertia) and almost always converges to a local optimum.",
+            "K-Means is parametric (K must be specified), linear (assumes spherical clusters), and sensitive to initialization (use K-Means++ for better starting centroids) and outliers. The Elbow Method helps choose K: plot inertia vs K and pick the 'elbow' where adding clusters gives diminishing returns.",
+            "K-Means limitations: requires specifying K in advance, sensitive to outliers and initial placement, assumes clusters are spherical and similarly sized. For arbitrary-shaped clusters or noisy data, use DBSCAN. K-Means is fast and scalable — a good starting point for clustering tasks."
+        ]
+        },
+
+        {
+        "tag": "dbscan",
+        "patterns": [
+            "What is DBSCAN", "Explain DBSCAN", "How does DBSCAN work",
+            "DBSCAN vs K-Means", "What is a core point in DBSCAN",
+            "What is epsilon in DBSCAN", "DBSCAN outlier detection",
+            "When to use DBSCAN", "Density based clustering"
+        ],
+        "responses": [
+            "DBSCAN (Density-Based Spatial Clustering of Applications with Noise) groups densely connected points into clusters and labels sparse points as noise (outliers). It requires two parameters: ε (neighborhood radius) and min_samples (minimum points to form a dense region). It does not require specifying K in advance.",
+            "DBSCAN classifies points as: Core points (≥ min_samples neighbors within ε), Border points (within ε of a core point but fewer neighbors), Noise points (outliers — not reachable from any core point). It finds clusters of arbitrary shape and is robust to outliers — major advantages over K-Means.",
+            "DBSCAN vs K-Means: DBSCAN finds arbitrary-shaped clusters and detects outliers automatically; K-Means assumes spherical clusters and assigns every point to a cluster. DBSCAN is non-parametric and non-linear. Its challenge: choosing ε and min_samples (use k-distance graph). OPTICS extends DBSCAN to handle varying density clusters."
+        ]
+        },
+
+        {
+        "tag": "agglomerative_clustering",
+        "patterns": [
+            "What is agglomerative clustering", "Explain hierarchical clustering",
+            "How does agglomerative clustering work", "What is a dendrogram",
+            "Bottom-up clustering", "Hierarchical vs K-Means",
+            "What is linkage in hierarchical clustering", "When to use hierarchical clustering"
+        ],
+        "responses": [
+            "Agglomerative Clustering is a bottom-up hierarchical method: starts with each point as its own cluster, then progressively merges the two closest clusters until the desired number remains. The full merge history can be visualized as a dendrogram — a tree diagram.",
+            "Linkage methods: Single Linkage (min distance — tends to chain), Complete Linkage (max distance — compact clusters), Average Linkage (mean distance — balanced), Ward Linkage (minimizes total within-cluster variance — most commonly used, produces compact clusters).",
+            "Advantages: no need to specify K in advance, produces a full hierarchy, works with any distance metric. Disadvantages: computationally expensive O(n² to n³), merges cannot be undone. Cut the dendrogram at the desired height to get K clusters. Non-parametric and suitable for small to medium datasets."
+        ]
+        },
+
+        {
+        "tag": "overfitting",
+        "patterns": [
+            "What is overfitting", "Explain overfitting",
+            "Why does my model overfit", "How to prevent overfitting",
+            "What causes overfitting", "Signs of overfitting",
+            "Overfitting in neural networks", "How to fix overfitting"
+        ],
+        "responses": [
+            "Overfitting occurs when a model learns the training data too well — including its noise — and fails to generalize to new data. Signs: very low training loss but high validation loss. The model memorizes instead of learning general patterns.",
+            "To prevent overfitting: increase training data or use data augmentation; reduce model complexity (fewer layers, neurons, tree depth); use regularization (L1, L2, Dropout); apply Early Stopping; use cross-validation. Note: changing the optimizer alone does NOT fix overfitting.",
+            "Overfitting is a high-variance problem — the model is too sensitive to the specific training set. In the bias-variance tradeoff, overfitting sits at the high-variance end. Regularization techniques add constraints that reduce variance at the cost of a small increase in bias."
+        ]
+        },
+
+        {
+        "tag": "underfitting",
+        "patterns": [
+            "What is underfitting", "Explain underfitting",
+            "How to fix underfitting", "Signs of underfitting",
+            "What causes underfitting", "My model is too simple",
+            "High bias problem in machine learning"
+        ],
+        "responses": [
+            "Underfitting occurs when a model is too simple to capture the underlying patterns in the data. Signs: both training loss and validation loss are high. The model has high bias and fails even on training data.",
+            "To fix underfitting: increase model complexity (more layers, neurons, or tree depth); train for more epochs; reduce regularization strength; use a more powerful model or architecture; add more relevant features; ensure the learning rate is not too small.",
+            "Underfitting is a high-bias problem. The model makes overly simplified assumptions and misses important patterns. It is the opposite of overfitting. In the bias-variance tradeoff, underfitting sits at the high-bias end. The sweet spot is a model with low bias and low variance."
+        ]
+        },
+
+        {
+        "tag": "l1_regularization",
+        "patterns": [
+            "What is L1 regularization", "Explain L1 regularization",
+            "What is the Lasso penalty", "How does L1 regularization work",
+            "L1 vs L2 regularization", "Does L1 regularization do feature selection"
+        ],
+        "responses": [
+            "L1 Regularization adds the sum of absolute weight values to the loss: Loss = original_loss + λ·Σ|wi|. It penalizes large weights and, crucially, tends to set irrelevant weights exactly to zero. This makes it a simultaneous regularization and feature selection technique.",
+            "L1 produces sparse models — many weights become exactly zero, effectively removing those features. This is because the L1 penalty has a 'corner' at zero in its geometry, making zero the optimal value for unimportant weights. Higher λ means more zeros.",
+            "Use L1 when: you suspect many features are irrelevant and want automatic feature selection; you want a sparse, interpretable model. Use L2 when: all features may contribute a little; you want smooth shrinkage without zeroing. ElasticNet combines both L1 and L2."
+        ]
+        },
+
+        {
+        "tag": "l2_regularization",
+        "patterns": [
+            "What is L2 regularization", "Explain L2 regularization",
+            "What is the Ridge penalty", "How does L2 regularization work",
+            "L2 vs L1 regularization", "What is weight decay"
+        ],
+        "responses": [
+            "L2 Regularization adds the sum of squared weight values to the loss: Loss = original_loss + λ·Σwi². It penalizes large weights by shrinking them proportionally toward zero, but never exactly to zero. All features are retained, just with smaller influence.",
+            "L2 (Ridge) is effective when all features potentially contribute — it distributes the regularization effect evenly. It is especially useful for handling multicollinearity (correlated features). In neural networks, L2 regularization is often called weight decay.",
+            "L2 produces smooth coefficient shrinkage — all weights become smaller but none are eliminated. Use it when you want all features to remain in the model but reduce the risk of overfitting from large coefficients. For neural networks, weight decay (L2) is commonly added to the optimizer (e.g., AdamW)."
+        ]
+        },
+
+        {
+        "tag": "dropout",
+        "patterns": [
+            "What is dropout", "Explain dropout",
+            "How does dropout work", "What is the dropout rate",
+            "Dropout in neural networks", "Why use dropout",
+            "When to apply dropout", "Dropout during training vs inference"
+        ],
+        "responses": [
+            "Dropout randomly sets a fraction of neuron outputs to zero during training with probability p (the dropout rate). This forces the network to not rely on any single neuron and prevents co-adaptation. At inference, all neurons are active but their outputs are scaled by (1-p).",
+            "Dropout acts as an ensemble: each training step trains a different sub-network (random subset of neurons). The final model approximates averaging over all possible sub-networks. Typical rates: 0.5 for fully connected layers, 0.2–0.3 for convolutional layers.",
+            "Dropout is only active during training — disabled at inference time. Apply it after activation functions in fully connected layers. For CNNs, use SpatialDropout (drops entire feature maps). Too high a rate causes underfitting; too low has little regularization. Combine with batch normalization for best results."
+        ]
+        },
+
+        {
+        "tag": "accuracy_metric",
+        "patterns": [
+            "What is accuracy", "Explain accuracy metric",
+            "How is accuracy calculated", "When not to use accuracy",
+            "Accuracy for imbalanced data", "Is accuracy a good metric"
+        ],
+        "responses": [
+            "Accuracy = (True Positives + True Negatives) / Total Samples. It measures the proportion of correct predictions. It is intuitive but unreliable for imbalanced datasets — a model predicting the majority class always achieves high accuracy while being useless for the minority.",
+            "Use Accuracy when classes are balanced and all errors have equal cost. Avoid it when: classes are imbalanced (use F1 or AUC-ROC), false positives and false negatives have different costs (use Precision or Recall specifically), or in medical/fraud tasks where missing a positive is critical.",
+            "High accuracy does not always mean a good model. Always check alongside Precision, Recall, and F1-Score, especially for imbalanced classification. The confusion matrix reveals the breakdown of correct and incorrect predictions for each class."
+        ]
+        },
+
+        {
+        "tag": "precision_metric",
+        "patterns": [
+            "What is precision", "Explain precision metric",
+            "How is precision calculated", "When to use precision",
+            "What does precision measure", "Precision vs recall"
+        ],
+        "responses": [
+            "Precision = True Positives / (True Positives + False Positives). It measures: of all the samples predicted as positive, how many were actually positive. High precision means few false alarms.",
+            "Use Precision when false positives are costly. Example: spam filter — you do not want legitimate emails flagged as spam. A high-precision spam filter rarely wrongly classifies good emails as spam, even if it misses some actual spam.",
+            "Precision is high when the model is conservative — it only predicts positive when very confident. This typically comes at the cost of lower Recall (missing some true positives). The Precision-Recall tradeoff is controlled by the classification threshold."
+        ]
+        },
+
+        {
+        "tag": "recall_metric",
+        "patterns": [
+            "What is recall", "Explain recall", "What is sensitivity",
+            "How is recall calculated", "When to use recall",
+            "What does recall measure", "Recall vs precision",
+            "What is true positive rate"
+        ],
+        "responses": [
+            "Recall (Sensitivity) = True Positives / (True Positives + False Negatives). It measures: of all actual positive samples, how many did the model correctly identify. High Recall means the model catches most true positives.",
+            "Use Recall when false negatives are costly. Example: cancer detection — missing a true positive (actual cancer classified as healthy) is far more dangerous than a false positive (healthy classified as potential cancer). High Recall minimizes missed cases.",
+            "Recall is high when the model is aggressive — it predicts positive broadly to avoid missing any true positives. This typically comes at the cost of lower Precision (more false alarms). The Precision-Recall tradeoff is controlled by the classification threshold."
+        ]
+        },
+
+        {
+        "tag": "f1_score",
+        "patterns": [
+            "What is F1 score", "Explain F1 score",
+            "How is F1 score calculated", "When to use F1 score",
+            "F1 score for imbalanced data", "What is the harmonic mean",
+            "F1 vs accuracy", "Macro vs micro F1 score"
+        ],
+        "responses": [
+            "F1-Score = 2 × (Precision × Recall) / (Precision + Recall). It is the harmonic mean of Precision and Recall, balancing both. It is the preferred metric for imbalanced datasets where Accuracy is misleading. A perfect F1-Score is 1.0.",
+            "F1-Score penalizes models that are good at only one of Precision or Recall. The harmonic mean is lower than the arithmetic mean — if either Precision or Recall is very low, F1 will be low too. This forces the model to balance both.",
+            "For multi-class: Macro F1 (average F1 per class, treats all classes equally), Micro F1 (aggregates globally, favors common classes), Weighted F1 (weights by class support — best for imbalanced multi-class). Use Weighted F1 as the default for imbalanced multi-class classification."
+        ]
+        },
+
+        {
+        "tag": "auc_roc",
+        "patterns": [
+            "What is AUC ROC", "Explain AUC ROC", "What is the ROC curve",
+            "What does AUC measure", "How to interpret AUC",
+            "What is the area under the ROC curve",
+            "When to use AUC ROC"
+        ],
+        "responses": [
+            "The ROC (Receiver Operating Characteristic) curve plots True Positive Rate (Recall) vs False Positive Rate at various classification thresholds. AUC (Area Under the Curve) summarizes it in one number. AUC = 0.5 means random classifier; AUC = 1.0 is perfect.",
+            "AUC-ROC measures the model's ability to distinguish between classes across all thresholds — it is threshold-independent. How to interpret: 0.9–1.0 excellent, 0.8–0.9 good, 0.7–0.8 fair, 0.5–0.6 poor. For highly imbalanced datasets, the Precision-Recall curve (AUC-PR) is more informative.",
+            "Use AUC-ROC as a standard metric for binary classification, especially when the classification threshold needs tuning. It is robust to class imbalance compared to Accuracy. For multi-class problems, compute AUC per class using a One-vs-Rest approach."
+        ]
+        },
+
+        {
+        "tag": "mse_metric",
+        "patterns": [
+            "What is MSE", "What is mean squared error",
+            "Explain MSE", "How is MSE calculated", "When to use MSE"
+        ],
+        "responses": [
+            "MSE (Mean Squared Error) = (1/n) · Σ(yi - ŷi)². It is the average of squared differences between true and predicted values. Squaring amplifies large errors — MSE penalizes big mistakes more heavily than small ones.",
+            "MSE is the most common regression loss function. It is differentiable everywhere, making it compatible with gradient descent. However, it is sensitive to outliers because large errors are squared. Use MSE when large prediction errors are particularly undesirable.",
+            "MSE is always non-negative; MSE = 0 means perfect predictions. Units are the square of the target variable's units (e.g., if predicting house price in $, MSE is in $²). Use RMSE (√MSE) for a metric in the same units as the target."
+        ]
+        },
+
+        {
+        "tag": "rmse_metric",
+        "patterns": [
+            "What is RMSE", "What is root mean squared error",
+            "Explain RMSE", "How is RMSE calculated",
+            "RMSE vs MAE", "When to use RMSE"
+        ],
+        "responses": [
+            "RMSE (Root Mean Squared Error) = √MSE = √[(1/n) · Σ(yi - ŷi)²]. It is in the same units as the target variable, making it more interpretable than MSE. Like MSE, it penalizes large errors heavily.",
+            "Use RMSE when large prediction errors are particularly costly — it punishes them more than MAE does. RMSE ≥ MAE always; when they are equal, all errors are the same magnitude. The larger the gap, the more variance in error sizes.",
+            "RMSE vs MAE: RMSE penalizes large errors more (due to squaring), MAE treats all errors proportionally. Choose RMSE when large errors are unacceptable (e.g., medical predictions, financial forecasting). Choose MAE when outliers exist and you want robustness — MAE is not affected by a few very large errors."
+        ]
+        },
+
+        {
+        "tag": "mae_metric",
+        "patterns": [
+            "What is MAE", "What is mean absolute error",
+            "Explain MAE", "How is MAE calculated",
+            "MAE vs MSE", "When to use MAE", "Is MAE robust to outliers"
+        ],
+        "responses": [
+            "MAE (Mean Absolute Error) = (1/n) · Σ|yi - ŷi|. It is the average of absolute differences between true and predicted values. MAE treats all error magnitudes equally — a 10-unit error counts exactly 10 times more than a 1-unit error.",
+            "MAE is robust to outliers because it does not square errors — a single very large error does not dominate the metric. Use MAE when outliers are expected and you do not want them to disproportionately affect the evaluation.",
+            "MAE is easy to interpret: it is the average absolute prediction error in the same units as the target. MAE ≤ RMSE always. Choose MAE for robustness to outliers; choose RMSE when you want to penalize large errors more. Both are common regression metrics — report both for a complete picture."
+        ]
+        },
+
+        {
+        "tag": "r_squared",
+        "patterns": [
+            "What is R squared", "Explain R squared",
+            "What is the coefficient of determination", "How is R2 calculated",
+            "How to interpret R squared", "What is a good R squared value"
+        ],
+        "responses": [
+            "R² (Coefficient of Determination) = 1 - (SS_residual / SS_total). It measures the proportion of variance in the target variable explained by the model. R²=1 means perfect fit; R²=0 means the model is no better than predicting the mean; R²<0 means the model is worse than the mean.",
+            "R² ranges from -∞ to 1 (though usually 0 to 1 for well-fitted models). A 'good' R² depends on the domain — 0.9+ is excellent for physics experiments, while 0.3 may be acceptable for social science predictions. Always interpret R² alongside residual plots to check for model assumptions.",
+            "R² measures goodness-of-fit for linear regression. Adjusted R² accounts for the number of features — adding irrelevant features can inflate R² but Adjusted R² penalizes this. For non-linear models, R² can still be computed but is less meaningful as a standalone metric."
+        ]
+        },
+
+        {
+        "tag": "confusion_matrix",
+        "patterns": [
+            "What is a confusion matrix", "Explain confusion matrix",
+            "What is TP TN FP FN", "True positive false positive false negative",
+            "How to read a confusion matrix", "What is a true positive rate",
+            "What is a false positive rate", "What is a false negative"
+        ],
+        "responses": [
+            "A Confusion Matrix is a table showing classifier performance. For binary classification: True Positives (TP — correctly predicted positive), True Negatives (TN — correctly predicted negative), False Positives (FP — predicted positive, actually negative; Type I error), False Negatives (FN — predicted negative, actually positive; Type II error).",
+            "From the Confusion Matrix: Accuracy = (TP+TN)/(TP+TN+FP+FN), Precision = TP/(TP+FP), Recall = TP/(TP+FN), Specificity = TN/(TN+FP), F1 = 2·TP/(2·TP+FP+FN). It gives a complete picture of where the model succeeds and where it confuses classes.",
+            "For multi-class problems, the confusion matrix extends to N×N (N classes). Diagonal entries are correct predictions; off-diagonal entries are misclassifications. It reveals which classes the model confuses with each other — essential for understanding model weaknesses beyond a single accuracy number."
+        ]
+        },
+
+        {
+        "tag": "silhouette_score",
+        "patterns": [
+            "What is silhouette score", "Explain silhouette score",
+            "How to evaluate clustering", "What is a good silhouette score",
+            "Silhouette score interpretation"
+        ],
+        "responses": [
+            "The Silhouette Score measures how well each data point fits its assigned cluster. For each point: s = (b - a) / max(a, b), where a = mean distance to points in its own cluster, b = mean distance to points in the nearest other cluster. Range: -1 to +1. +1 = well-clustered, 0 = on cluster boundary, -1 = likely mis-clustered.",
+            "The average Silhouette Score across all points evaluates overall clustering quality. A score above 0.5 generally indicates good clustering; below 0.25 suggests poor separation. It can also be used to choose the optimal number of clusters K — pick K with the highest average Silhouette Score.",
+            "Silhouette Score is model-agnostic (works with any clustering algorithm) and does not require ground-truth labels. It balances cohesion (how tight a cluster is) and separation (how distinct clusters are from each other). Compute it alongside the Elbow Method for a complete K selection analysis."
+        ]
+        },
+
+        {
+        "tag": "davies_bouldin_calinski",
+        "patterns": [
+            "What is Davies-Bouldin index", "Explain Davies-Bouldin index",
+            "What is Calinski-Harabasz index", "What is inertia in K-Means",
+            "How to measure clustering quality without labels",
+            "Clustering evaluation metrics comparison"
+        ],
+        "responses": [
+            "Davies-Bouldin Index (DBI) = average of max(σi + σj) / d(ci, cj) for each cluster pair, where σ is within-cluster scatter and d is distance between centroids. Lower DBI is better — it means clusters are compact and well-separated. Unlike Silhouette, it is cheaper to compute.",
+            "Calinski-Harabasz Index (Variance Ratio Criterion) = ratio of between-cluster dispersion to within-cluster dispersion. Higher values indicate better-defined, more compact clusters. It is fast to compute and works well for globular clusters.",
+            "Clustering evaluation summary: Silhouette Score (-1 to 1, higher is better — most interpretable), Davies-Bouldin Index (lower is better), Calinski-Harabasz Index (higher is better), Inertia (K-Means specific — lower is better but always decreases with more K, use the Elbow Method). If ground-truth labels are available, use Adjusted Rand Index (ARI)."
+        ]
+        },
+
+        {
+        "tag": "cross_validation",
+        "patterns": [
+            "What is cross validation", "Explain cross validation",
+            "What is k-fold cross validation", "What is stratified k-fold",
+            "How does cross validation work", "Why use cross validation",
+            "What is a validation set", "Cross validation vs train test split"
+        ],
+        "responses": [
+            "Cross-validation estimates how well a model generalizes to unseen data. In k-fold CV, data is split into k equal parts (folds); the model trains on k-1 folds and is tested on the remaining fold, repeating k times. The final score is the average — more reliable than a single train-test split.",
+            "Stratified k-fold ensures each fold maintains the same class distribution as the original dataset — critical for imbalanced data. Standard k-fold splits randomly without this guarantee. Always use Stratified k-fold for classification tasks.",
+            "Common CV schemes: k-fold (k=5 or 10 are standard), Stratified k-fold (for classification), Leave-One-Out (k=n — expensive, for very small datasets), Time Series Split (for temporal data — never shuffle time series). CV is essential for hyperparameter tuning and unbiased model evaluation."
+        ]
+        },
+
+        {
+        "tag": "feature_scaling",
+        "patterns": [
+            "What is feature scaling", "What is normalization",
+            "What is standardization", "What is min max scaling",
+            "What is z-score normalization", "When to scale features",
+            "Which algorithms need feature scaling",
+            "Normalization vs standardization"
+        ],
+        "responses": [
+            "Feature Scaling brings all features to the same scale. Standardization (Z-score): x' = (x - mean) / std — zero mean, unit variance. Min-Max Normalization: x' = (x - min) / (max - min) — scales to [0, 1]. Both prevent large-valued features from dominating distance calculations.",
+            "Feature scaling is essential for: kNN (distance-based), SVM (distance-based), gradient descent-based models (speeds convergence), PCA (variance-based). NOT required for: Decision Trees, Random Forests, XGBoost (tree splits are scale-invariant). Scaling helps convergence but does not prevent overfitting.",
+            "Standardization vs Min-Max: use Standardization when the data follows a Gaussian distribution or when there are outliers (they won't compress the range). Use Min-Max when values in [0, 1] are needed (e.g., sigmoid output layers, image pixels). Always fit on training data only — transform train and test with the same parameters."
+        ]
+        },
+
+        {
+        "tag": "one_hot_encoding",
+        "patterns": [
+            "What is one-hot encoding", "Explain one-hot encoding",
+            "How to encode categorical data", "What is label encoding",
+            "One-hot vs label encoding", "How to handle categorical features",
+            "What is nominal data", "What is ordinal encoding"
+        ],
+        "responses": [
+            "One-Hot Encoding converts nominal categorical features (no inherent order) into binary vectors. For a feature with N categories, it creates N binary columns indicating category presence. Example: Color=[Red,Blue,Green] → [is_Red, is_Blue, is_Green]. Prevents false ordering implied by integers.",
+            "Label Encoding assigns an integer to each category (Red=0, Blue=1, Green=2). Use it for ordinal features where order is meaningful (Low=0, Medium=1, High=2). Avoid Label Encoding for nominal features in linear models — the model will incorrectly interpret the integers as having a meaningful order.",
+            "One-Hot Encoding can cause the dummy variable trap (multicollinearity) when all binary columns sum to 1. Fix: drop one column (drop_first=True in pandas). For high-cardinality features (many unique values), consider Target Encoding or Embedding layers to avoid exploding dimensionality."
+        ]
+        },
+
+        {
+        "tag": "missing_values",
+        "patterns": [
+            "How to handle missing values", "What is data imputation",
+            "What to do with NaN values", "Missing data strategies",
+            "Mean imputation", "Median imputation",
+            "Should I drop rows with missing values"
+        ],
+        "responses": [
+            "Strategies for missing values: (1) Remove rows/columns with too many missing values; (2) Mean imputation (numerical, works for normally distributed data); (3) Median imputation (better when outliers are present); (4) Mode imputation (categorical); (5) KNN Imputation (fill using nearest neighbors); (6) Model-based imputation.",
+            "Choose based on context: Mean imputation is simple but can distort distributions. Median imputation is more robust to outliers. For data not Missing At Random (MNAR), simple imputation may introduce bias. Always compute imputation statistics from training data only to prevent data leakage.",
+            "Consider adding a binary 'was_missing' indicator feature alongside imputed values — this preserves the information that the value was absent, which may be meaningful to the model. Tree-based models (Random Forest, XGBoost) can handle missing values natively without explicit imputation."
+        ]
+        },
+
+        {
+        "tag": "imbalanced_data",
+        "patterns": [
+            "What is imbalanced data", "How to handle imbalanced classes",
+            "What is SMOTE", "Class imbalance problem",
+            "Oversampling vs undersampling", "What is class weight",
+            "How to deal with imbalanced dataset"
+        ],
+        "responses": [
+            "Imbalanced data: one class far outnumbers another (e.g., 99% non-fraud, 1% fraud). Strategies: SMOTE (creates synthetic minority class samples), undersampling majority class, class weights in the loss function, threshold tuning, and using appropriate metrics (F1, AUC-ROC, not Accuracy).",
+            "SMOTE (Synthetic Minority Over-sampling Technique) generates new minority class samples by interpolating between existing ones — creates synthetic, not duplicate, samples. Apply SMOTE only to the training set, never to validation or test sets.",
+            "Rules for imbalanced data: never use Accuracy as the metric; use Stratified K-Fold to maintain class ratios; use class_weight='balanced' in sklearn; choose F1-Score, AUC-ROC, or Precision-Recall AUC; consider adjusting the decision threshold from 0.5 to a value that better suits your precision-recall needs."
+        ]
+        },
+
+        {
+        "tag": "pca",
+        "patterns": [
+            "What is PCA", "Explain PCA", "How does PCA work",
+            "What is principal component analysis",
+            "What is explained variance ratio", "What are principal components",
+            "PCA for dimensionality reduction", "Is PCA supervised or unsupervised",
+            "When to use PCA"
+        ],
+        "responses": [
+            "PCA (Principal Component Analysis) is an unsupervised linear technique that finds new orthogonal axes (principal components) capturing maximum variance. The first component captures the most variance, the second captures the next most, and so on. Data is projected onto the top m components to reduce dimensionality.",
+            "PCA steps: (1) Standardize the data; (2) Compute the covariance matrix; (3) Compute eigenvectors (components) and eigenvalues (variance captured); (4) Sort by eigenvalue descending; (5) Project data onto top m components. Use the Explained Variance Ratio to choose m — keep enough components to explain ~95% of variance.",
+            "PCA uses: speed up training, remove correlated features, visualize data in 2D/3D, reduce noise. Limitations: components are linear combinations of all features (hard to interpret), assumes linear structure, sensitive to feature scale (always standardize first). PCA is unsupervised — for a supervised alternative that maximizes class separation, use LDA."
+        ]
+        },
+
+        {
+        "tag": "lda_dimensionality",
+        "patterns": [
+            "What is LDA for dimensionality reduction", "Explain LDA",
+            "What is linear discriminant analysis",
+            "PCA vs LDA", "How does LDA work",
+            "Is LDA supervised or unsupervised", "When to use LDA"
+        ],
+        "responses": [
+            "LDA (Linear Discriminant Analysis) is a supervised dimensionality reduction technique. It finds linear axes that maximize the separation between classes (maximize between-class variance) while minimizing spread within classes (minimize within-class variance). It uses class labels, unlike PCA.",
+            "LDA vs PCA: PCA is unsupervised and maximizes total variance. LDA is supervised and maximizes class separability. LDA produces at most C-1 components (C = number of classes). Use LDA as a preprocessing step for classification when you want discriminative features.",
+            "LDA assumes Gaussian-distributed data with equal covariance matrices across classes. It is fast and interpretable. For non-linear class separation, use Kernel LDA. LDA also doubles as a linear classifier itself (it can directly predict class labels like Logistic Regression)."
+        ]
+        },
+
+        {
+        "tag": "tsne",
+        "patterns": [
+            "What is t-SNE", "Explain t-SNE",
+            "How does t-SNE work", "t-SNE for visualization",
+            "t-SNE vs PCA", "t-SNE vs UMAP",
+            "When to use t-SNE", "What does t-SNE preserve"
+        ],
+        "responses": [
+            "t-SNE (t-distributed Stochastic Neighbor Embedding) is a non-linear dimensionality reduction technique mainly used for visualizing high-dimensional data in 2D or 3D. It preserves local structure — data points close in the original high-dimensional space remain close in the 2D embedding.",
+            "t-SNE works by modeling pairwise similarities as probabilities in high-dimensional space (Gaussian) and in low-dimensional space (t-distribution), then minimizing the KL divergence between the two. The t-distribution's heavy tails prevent all points from clustering in the center.",
+            "t-SNE limitations: computationally expensive O(n²), non-deterministic (random initialization), cannot project new data points (must re-run), does not preserve global structure well. Use it for visualization only, not for feature extraction for downstream models. For large datasets or when global structure matters, use UMAP."
+        ]
+        },
+
+        {
+        "tag": "umap",
+        "patterns": [
+            "What is UMAP", "Explain UMAP",
+            "How does UMAP work", "UMAP vs t-SNE",
+            "When to use UMAP", "What does UMAP preserve",
+            "UMAP for dimensionality reduction"
+        ],
+        "responses": [
+            "UMAP (Uniform Manifold Approximation and Projection) is a non-linear dimensionality reduction technique. It is significantly faster than t-SNE, preserves both local and global structure better, and can be used for general dimensionality reduction — not just visualization.",
+            "UMAP vs t-SNE: UMAP is faster (especially for large datasets), better at preserving global structure (relative positions of clusters), produces more reproducible results, and can project new data points without retraining. Both preserve local neighborhood structure. UMAP is generally preferred in modern practice.",
+            "UMAP can be used for both 2D/3D visualization and as a preprocessing step before classification. Key hyperparameters: n_neighbors (controls local vs global structure tradeoff — higher = more global) and min_dist (controls how tightly points are packed — lower = tighter clusters)."
+        ]
+        },
+
+        {
+        "tag": "lle",
+        "patterns": [
+            "What is LLE", "Explain LLE",
+            "What is locally linear embedding", "How does LLE work",
+            "When to use LLE", "LLE for dimensionality reduction",
+            "What does LLE preserve", "LLE vs PCA", "LLE vs t-SNE"
+        ],
+        "responses": [
+            "LLE (Locally Linear Embedding) is a non-linear dimensionality reduction technique. Its core idea: each data point can be approximately reconstructed as a weighted linear combination of its k nearest neighbors. LLE finds a low-dimensional embedding that preserves these local linear reconstruction weights.",
+            "LLE works in two steps: (1) For each point, find its k nearest neighbors and compute weights that best reconstruct it as their linear combination (solve a least-squares problem); (2) Find the low-dimensional embedding where each point is still reconstructed by the same weights from the same neighbors. This preserves local geometry.",
+            "LLE is sensitive to the choice of k (number of neighbors), does not scale well to very large datasets, and cannot handle sparse data or manifolds with holes well. It is suitable when data lies on a smooth, well-sampled non-linear manifold. Unlike t-SNE (which preserves pairwise distances), LLE preserves local linear structure around each point."
+        ]
+        },
+
+        {
+        "tag": "isomap",
+        "patterns": [
+            "What is Isomap", "Explain Isomap",
+            "How does Isomap work", "What are geodesic distances",
+            "Isomap vs PCA", "Isomap vs LLE",
+            "When to use Isomap", "Isomap dimensionality reduction"
+        ],
+        "responses": [
+            "Isomap (Isometric Mapping) extends PCA to non-linear manifolds by replacing Euclidean distances with geodesic distances — distances along the manifold surface rather than straight through the embedding space. This captures the true curved geometry of non-linear data.",
+            "Isomap steps: (1) Build a k-nearest-neighbor graph connecting each point to its k nearest neighbors; (2) Compute shortest-path geodesic distances between all pairs of points (Dijkstra's algorithm); (3) Apply classical Multidimensional Scaling (MDS) to embed points in a lower-dimensional space that preserves these geodesic distances.",
+            "Isomap preserves global manifold geometry — the overall shape and distances along the manifold — unlike LLE which only preserves local structure. Limitations: sensitive to noise and outliers (a single bad graph edge corrupts shortest paths), slow for large datasets O(n² log n), struggles with manifolds that have holes or sparse regions."
+        ]
+        },
+
+        {
+        "tag": "neural_network_basics",
+        "patterns": [
+            "What is a neural network", "Explain neural networks",
+            "What is an artificial neural network", "What is ANN",
+            "How do neural networks work", "What is a hidden layer",
+            "What is deep learning", "Neural network structure",
+            "What is a feed-forward network", "What is an MLP",
+            "What is a multi-layer perceptron"
+        ],
+        "responses": [
+            "A neural network consists of layers of artificial neurons: Input Layer (receives raw data), Hidden Layers (learn intermediate representations), and Output Layer (produces predictions). Each connection has a learnable weight, and each neuron has a bias and an activation function. The network learns by adjusting weights to minimize a loss function.",
+            "A Multi-Layer Perceptron (MLP) is the basic deep learning architecture — a fully connected feed-forward network with at least one hidden layer. Each hidden layer applies a linear transformation followed by a non-linear activation function. This allows MLPs to model any continuous function (Universal Approximation Theorem).",
+            "Deep learning refers to neural networks with many hidden layers. Deeper networks learn hierarchical features: early layers detect simple patterns (edges, tones), later layers detect complex concepts (shapes, objects, scenes). This is called hierarchical compositionality and is a key advantage over shallow models."
+        ]
+        },
+
+        {
+        "tag": "perceptron",
+        "patterns": [
+            "What is a perceptron", "Explain perceptron",
+            "How does a perceptron work", "What is the perceptron algorithm",
+            "Perceptron vs MLP", "What can a perceptron not learn",
+            "What is the XOR problem", "Perceptron limitations"
+        ],
+        "responses": [
+            "A Perceptron is the simplest neural unit: takes inputs (x1, x2,...), multiplies by weights (w1, w2,...), adds a bias (b), and passes the sum through a step activation function to output 0 or 1. It updates weights only when it predicts incorrectly: w ← w + α·(y - ŷ)·x.",
+            "The Perceptron is a linear classifier — it can only solve linearly separable problems. It famously cannot learn the XOR function because XOR is not linearly separable. This limitation, highlighted by Minsky and Papert (1969), motivated the development of Multi-Layer Perceptrons with hidden layers.",
+            "The Perceptron Convergence Theorem guarantees that if the data is linearly separable, the perceptron will converge to a solution. But for non-linearly separable data (like XOR), it never converges. Adding hidden layers with non-linear activations (creating an MLP) solves this — MLPs can learn any function."
+        ]
+        },
+
+        {
+        "tag": "relu",
+        "patterns": [
+            "What is ReLU", "Explain ReLU",
+            "What is rectified linear unit", "How does ReLU work",
+            "ReLU vs sigmoid", "What is the dying ReLU problem",
+            "What is leaky ReLU", "ReLU advantages and disadvantages"
+        ],
+        "responses": [
+            "ReLU (Rectified Linear Unit): f(x) = max(0, x). Outputs x if positive, 0 otherwise. It is the most widely used activation in deep networks because it is computationally cheap, sparse (many neurons output 0), and avoids the vanishing gradient problem for positive inputs.",
+            "The Dying ReLU problem: neurons stuck with negative pre-activations always output 0 and have zero gradient — they stop learning permanently. Solutions: Leaky ReLU (f(x) = max(0.01x, x) — small slope for negatives), ELU (exponential for negatives), or careful weight initialization with He initialization.",
+            "ReLU variants: Leaky ReLU (constant small slope α for x<0), Parametric ReLU/PReLU (learns α during training), ELU (exponential curve for x<0, smoother outputs), SELU (self-normalizing — maintains mean 0 and unit variance). ReLU remains the most common choice for hidden layers due to simplicity and speed."
+        ]
+        },
+
+        {
+        "tag": "sigmoid_activation",
+        "patterns": [
+            "What is the sigmoid activation function", "Explain sigmoid activation",
+            "How does sigmoid work", "When to use sigmoid activation",
+            "Sigmoid output range", "Sigmoid for binary classification output",
+            "Sigmoid and vanishing gradient"
+        ],
+        "responses": [
+            "Sigmoid: σ(x) = 1 / (1 + e^(-x)). Maps any real input to (0, 1). Used in the output layer for binary classification to represent probability. For inputs far from 0, it saturates (output near 0 or 1) causing near-zero gradients — the vanishing gradient problem.",
+            "Use Sigmoid in the output layer for binary classification. Avoid it in hidden layers of deep networks: it saturates for large/small inputs (gradients ≈ 0), outputs are not zero-centered (slows gradient descent), and it is computationally more expensive than ReLU. Use ReLU in hidden layers instead.",
+            "The vanishing gradient problem: when sigmoid saturates, its gradient approaches zero, making weight updates in early layers nearly zero. This made training deep networks very difficult before ReLU and batch normalization. Modern solutions: ReLU activations, batch normalization, residual connections (ResNets)."
+        ]
+        },
+
+        {
+        "tag": "softmax",
+        "patterns": [
+            "What is softmax", "Explain softmax activation",
+            "How does softmax work", "When to use softmax",
+            "Softmax vs sigmoid", "Softmax for multi-class classification",
+            "What does softmax output", "Softmax formula"
+        ],
+        "responses": [
+            "Softmax converts a vector of raw scores (logits) into a probability distribution: softmax(xi) = e^xi / Σe^xj. Each output is between 0 and 1, and all outputs sum to 1. Used in the output layer for multi-class classification.",
+            "Sigmoid vs Softmax: Sigmoid is for binary classification (one output neuron, probability of the positive class). Softmax is for multi-class classification (N output neurons, one per class, all sum to 1). Use Softmax with Categorical Cross-Entropy loss.",
+            "Softmax amplifies differences between logits — the highest logit becomes the dominant probability. Temperature scaling (dividing logits by T > 1) softens the distribution, useful for model calibration. Softmax is differentiable, compatible with backpropagation."
+        ]
+        },
+
+        {
+        "tag": "tanh_activation",
+        "patterns": [
+            "What is tanh", "Explain tanh activation",
+            "How does tanh work", "Tanh vs sigmoid",
+            "When to use tanh", "Tanh output range"
+        ],
+        "responses": [
+            "Tanh (Hyperbolic Tangent): tanh(x) = (e^x - e^(-x)) / (e^x + e^(-x)). Maps any input to (-1, 1). It is zero-centered (unlike Sigmoid) which helps gradient descent. It still saturates for large inputs, causing vanishing gradients in deep hidden layers.",
+            "Tanh vs Sigmoid: both are S-shaped and saturate, but Tanh outputs are zero-centered — the mean of Tanh outputs is 0, which reduces the zig-zagging updates in gradient descent caused by non-zero-centered outputs. Tanh is preferred over Sigmoid in hidden layers when using saturating activations.",
+            "Tanh is commonly used in RNNs and LSTMs (for gate activations and state outputs). For feedforward networks and CNNs, ReLU is generally preferred because it avoids vanishing gradients and is faster to compute. Use Tanh when you need outputs in the (-1, 1) range."
+        ]
+        },
+
+        {
+        "tag": "backpropagation",
+        "patterns": [
+            "What is backpropagation", "Explain backpropagation",
+            "How does backpropagation work", "What is the chain rule in neural networks",
+            "How are neural network weights updated",
+            "What is gradient computation in neural networks",
+            "Forward pass and backward pass"
+        ],
+        "responses": [
+            "Backpropagation trains neural networks in two phases: (1) Forward Pass — input flows through the network producing an output and a loss; (2) Backward Pass — the loss gradient is propagated backward through the network using the chain rule of calculus, computing the gradient of the loss with respect to each weight.",
+            "Chain rule in backprop: the gradient of the loss w.r.t. an early weight equals the product of all local gradients along the path from the output to that weight. This allows efficient computation of all gradients in one backward pass. Update: w ← w - α·∂L/∂w.",
+            "Backpropagation loop: (1) Forward Pass — compute predictions; (2) Compute Loss — measure error; (3) Backward Pass — compute all gradients via chain rule; (4) Update Weights — apply optimizer (SGD, Adam). Repeat for mini-batches across epochs until convergence."
+        ]
+        },
+
+        {
+        "tag": "gradient_descent",
+        "patterns": [
+            "What is gradient descent", "Explain gradient descent",
+            "How does gradient descent work", "What is a learning rate in training",
+            "Batch gradient descent vs SGD",
+            "What is mini-batch gradient descent",
+            "How to choose a learning rate for neural networks"
+        ],
+        "responses": [
+            "Gradient Descent minimizes the loss function by iteratively moving weights in the direction of the negative gradient: w ← w - α·∇L(w), where α is the learning rate. It finds a (local) minimum of the loss surface by following the steepest downhill direction.",
+            "Variants: Batch GD (uses all data per update — accurate but slow), SGD (one sample per update — fast but noisy), Mini-batch GD (small batches — standard in deep learning, balances speed and stability). Mini-batch with batch size 32–512 is the default.",
+            "Learning rate: too small = very slow convergence; too large = divergence or oscillation. Solutions: learning rate schedulers (reduce on plateau, cosine annealing), Adam optimizer (adapts the learning rate per parameter automatically), warmup (gradually increase LR at the start of training)."
+        ]
+        },
+
+        {
+        "tag": "adam_optimizer",
+        "patterns": [
+            "What is Adam optimizer", "Explain Adam optimizer",
+            "How does Adam work", "Adam vs SGD",
+            "What is momentum in deep learning", "What is RMSprop",
+            "Which optimizer should I use for neural networks",
+            "Optimizers comparison"
+        ],
+        "responses": [
+            "Adam (Adaptive Moment Estimation) combines SGD with Momentum and RMSprop. It maintains two moving averages: the first moment (mean of gradients — momentum) and the second moment (mean of squared gradients — adaptive learning rate). Each parameter gets its own adaptive learning rate.",
+            "Adam advantages: fast convergence, works well with sparse gradients, little tuning needed, handles non-stationary objectives. It is the default optimizer for most deep learning tasks. Common variants: AdamW (decoupled weight decay — better generalization), RAdam (rectified Adam), Nadam (Adam + Nesterov momentum).",
+            "Optimizer comparison: SGD — simple, sometimes generalizes better on vision (with careful tuning); SGD+Momentum — faster, less oscillation; RMSprop — adaptive, good for RNNs; Adam — adaptive + momentum, best default; AdamW — Adam with proper weight decay, preferred for transformers. Start with Adam, switch to AdamW for large models."
+        ]
+        },
+
+        {
+        "tag": "loss_functions",
+        "patterns": [
+            "What is a loss function in neural networks", "Explain loss functions",
+            "What is cross entropy loss", "What is binary cross entropy",
+            "What is categorical cross entropy", "What is MSE loss",
+            "How to choose a loss function for neural networks"
+        ],
+        "responses": [
+            "The loss function measures how far the model's prediction is from the true value. Classification: Binary Cross-Entropy (binary output + sigmoid), Categorical Cross-Entropy (multi-class + softmax). Regression: MSE (penalizes large errors), MAE (robust to outliers), Huber (combination of both).",
+            "Binary Cross-Entropy: L = -[y·log(ŷ) + (1-y)·log(1-ŷ)]. Penalizes confident wrong predictions heavily. Categorical Cross-Entropy extends this to multiple classes. The output activation and loss must match: sigmoid → Binary CE, softmax → Categorical CE, linear → MSE/MAE.",
+            "Loss function selection: binary classification → Binary Cross-Entropy; multi-class classification → Categorical Cross-Entropy; regression, large errors matter → MSE/RMSE; regression, outliers present → MAE or Huber. The loss defines what the model optimizes — choose it to match your actual goal."
+        ]
+        },
+
+        {
+        "tag": "batch_normalization",
+        "patterns": [
+            "What is batch normalization", "Explain batch normalization",
+            "How does batch normalization work", "Why use batch normalization",
+            "Batch norm vs layer norm", "What does batch normalization do to training"
+        ],
+        "responses": [
+            "Batch Normalization normalizes the inputs of each layer to have zero mean and unit variance within each mini-batch, then applies learned scale (γ) and shift (β) parameters. It stabilizes training, allows higher learning rates, and reduces sensitivity to weight initialization.",
+            "Batch Normalization benefits: faster and more stable training, allows deeper networks, mild regularization effect (slightly reduces the need for Dropout), reduces the vanishing gradient problem. Typically applied between the linear transformation and the activation function.",
+            "Batch Norm vs Layer Norm: Batch Norm normalizes across the batch dimension (good for CNNs, unstable for small batches). Layer Norm normalizes across the feature dimension (better for RNNs and Transformers, works with batch size 1). Instance Norm and Group Norm are other variants for specific architectures."
+        ]
+        },
+
+        {
+        "tag": "weight_initialization",
+        "patterns": [
+            "What is weight initialization", "Why is weight initialization important",
+            "What is Xavier initialization", "What is He initialization",
+            "Why not initialize weights to zero",
+            "What is the symmetry problem in neural networks"
+        ],
+        "responses": [
+            "All-zero initialization fails because all neurons compute the same gradient and update identically — called the symmetry problem. Random initialization breaks symmetry, allowing each neuron to learn different features. The scale of random initialization matters for gradient flow.",
+            "Xavier (Glorot) initialization: weights from a distribution with variance 2/(fan_in + fan_out). Designed for Sigmoid and Tanh — balances gradient flow through the network. He initialization: variance 2/fan_in. Designed for ReLU — accounts for the fact that ReLU zeros out half the inputs.",
+            "Use He initialization for ReLU and its variants (default in PyTorch for Conv layers). Use Xavier (Glorot) for Sigmoid and Tanh. Good initialization helps gradients flow properly — if weights are too large, activations saturate; too small, gradients vanish. Modern frameworks apply these automatically."
+        ]
+        },
+
+        {
+        "tag": "early_stopping",
+        "patterns": [
+            "What is early stopping", "Explain early stopping",
+            "How does early stopping work", "Early stopping to prevent overfitting",
+            "What is patience in early stopping",
+            "When to stop training a neural network"
+        ],
+        "responses": [
+            "Early Stopping monitors validation loss (or another metric) during training and stops when it stops improving. The model is saved at the epoch with the best validation performance. This prevents overfitting — training is halted before the model starts memorizing the training data.",
+            "Early Stopping parameters: monitor (val_loss or val_accuracy), patience (epochs to wait for improvement before stopping — typically 5–20), min_delta (minimum improvement to count), restore_best_weights (True — restore weights from the best epoch). It is one of the simplest and most effective regularization techniques.",
+            "Early Stopping is complementary to other regularization. If training loss keeps dropping but validation loss plateaus or rises, the model is overfitting — Early Stopping catches this. Combined with a learning rate scheduler (reduce LR on plateau), it often achieves good generalization with minimal hyperparameter tuning."
+        ]
+        },
+
+        {
+        "tag": "autoencoder_basics",
+        "patterns": [
+            "What is an autoencoder", "Explain autoencoders",
+            "How does an autoencoder work", "What is the structure of an autoencoder",
+            "What is an autoencoder used for",
+            "Autoencoder for dimensionality reduction",
+            "Autoencoder for anomaly detection",
+            "What is reconstruction error"
+        ],
+        "responses": [
+            "An autoencoder is an unsupervised neural network that compresses data into a compact representation and then reconstructs the original input. It has three parts: Encoder (maps input to latent code), Bottleneck Layer (compressed representation), Decoder (reconstructs input from code). Training minimizes reconstruction error.",
+            "Autoencoders learn useful data representations without labels. The bottleneck forces the network to capture only essential information. Applications: dimensionality reduction, feature extraction, denoising, anomaly detection (anomalies have high reconstruction error), and pre-training deep networks.",
+            "Autoencoder training is self-supervised: the target is the input itself. Loss = reconstruction error (MSE for continuous data, BCE for binary). The encoder's output (latent code) can be used for downstream tasks like classification, clustering, or visualization."
+        ]
+        },
+
+        {
+        "tag": "undercomplete_overcomplete_ae",
+        "patterns": [
+            "What is an undercomplete autoencoder",
+            "What is an overcomplete autoencoder",
+            "Undercomplete vs overcomplete autoencoder",
+            "What is the bottleneck size in autoencoders",
+            "What happens if the latent space is too large"
+        ],
+        "responses": [
+            "An Undercomplete Autoencoder has a bottleneck smaller than the input — it forces compression. The encoder must discard redundant information and retain only the most essential features. This is the standard structure for dimensionality reduction. It compresses well for the training distribution but may not generalize to very different inputs.",
+            "An Overcomplete Autoencoder has a hidden layer larger than the input — no compression is forced. Without constraints, it may learn the trivial identity mapping (just copy the input, zero learning). To be useful, overcomplete AEs must be regularized: Sparsity (few active neurons) or Denoising (reconstruct from noisy input).",
+            "Bottleneck size tradeoff: too small → high reconstruction error, features too coarse; appropriate → compact, useful representation; too large without regularization → trivial identity. The right size depends on the intrinsic dimensionality of your data. Start small and increase if reconstruction quality is insufficient."
+        ]
+        },
+
+        {
+        "tag": "denoising_autoencoder",
+        "patterns": [
+            "What is a denoising autoencoder", "Explain denoising autoencoder",
+            "How does a denoising autoencoder work",
+            "What is the purpose of a denoising autoencoder",
+            "Denoising AE vs standard autoencoder",
+            "What noise types are used in denoising autoencoders"
+        ],
+        "responses": [
+            "A Denoising Autoencoder (DAE) is trained to reconstruct the clean original input from a corrupted (noisy) version. The encoder receives corrupted input; the decoder must output the original clean data. This forces learning of robust, meaningful features rather than just memorizing the input.",
+            "DAE corruption methods: Gaussian noise (add random noise), Masking noise (randomly zero out some inputs), Salt-and-pepper noise (set random pixels to min or max). The key insight: even with an overcomplete bottleneck, denoising forces the model to learn the underlying data manifold — not the identity function.",
+            "DAE training: corrupt input x → get x̃; feed x̃ to encoder; decoder produces x̂; minimize loss(x̂, x) (compare to the clean original, not the noisy input). This is different from standard AE. Denoising autoencoders learn a more robust latent space and inspired modern self-supervised methods like BERT (masking input tokens)."
+        ]
+        },
+
+        {
+        "tag": "sparse_autoencoder",
+        "patterns": [
+            "What is a sparse autoencoder", "Explain sparse autoencoder",
+            "How does sparsity work in autoencoders",
+            "What is sparsity regularization in autoencoders",
+            "KL divergence sparsity in autoencoders",
+            "Why use a sparse autoencoder over a standard one"
+        ],
+        "responses": [
+            "A Sparse Autoencoder adds a sparsity penalty to the loss to ensure only a small fraction of hidden neurons are active for any given input. Even with an overcomplete hidden layer, sparsity prevents trivial identity mapping and forces each neuron to specialize in detecting specific patterns.",
+            "Two methods to enforce sparsity: (1) L1 Regularization on activations — adds λ·Σ|hi| to the loss, directly drives activations toward zero; (2) KL-Divergence Penalty — penalizes the average activation of each neuron when it deviates from a desired low target value (e.g., 0.05). KL divergence allows some activations but keeps the average sparse.",
+            "Sparse representations are more interpretable — each neuron responds to a specific pattern in the input (similar to edge detectors in the visual cortex). Sparsity also improves generalization by focusing on the most discriminative features and reducing the risk of co-adaptation between neurons."
+        ]
+        },
+
+        {
+        "tag": "variational_autoencoder",
+        "patterns": [
+            "What is a variational autoencoder", "Explain VAE",
+            "How does a VAE work",
+            "VAE vs standard autoencoder",
+            "What is the reparameterization trick",
+            "What is KL divergence loss in VAE",
+            "Can autoencoders generate new data",
+            "What is a generative model"
+        ],
+        "responses": [
+            "A VAE (Variational Autoencoder) is a generative model. Instead of encoding input to a single latent point, the encoder outputs parameters of a probability distribution (mean μ and log-variance σ²). The decoder samples from this distribution to reconstruct the input — and new data can be generated by sampling from the latent space.",
+            "VAE loss = Reconstruction Loss (MSE or BCE) + KL Divergence. The KL term regularizes the latent distribution to be close to a standard Gaussian N(0,1). This ensures the latent space is smooth and continuous — nearby points in latent space produce similar outputs, enabling interpolation between data points.",
+            "Reparameterization trick: to backpropagate through sampling, VAE uses z = μ + σ·ε where ε ~ N(0,1). This makes the sampling differentiable. VAE vs AE: standard AE encodes to a point (discrete, not generative); VAE encodes to a distribution (smooth latent space, enables generation). VAEs are the foundation of many modern generative models."
+        ]
+        },
+
+        {
+        "tag": "stacked_autoencoder",
+        "patterns": [
+            "What is a stacked autoencoder", "Explain stacked autoencoders",
+            "How does a stacked autoencoder work",
+            "What is greedy layer-wise pretraining",
+            "Deep autoencoder", "Multiple encoder layers"
+        ],
+        "responses": [
+            "A Stacked Autoencoder has multiple hidden layers in both encoder and decoder, forming a deep architecture. Each encoder layer progressively compresses the representation further. It learns hierarchical features — low-level in early layers, high-level in deeper layers.",
+            "Historical training: greedy layer-wise pretraining — train one shallow autoencoder at a time, using the previous encoder's output as the next layer's input. After pretraining each layer, fine-tune the whole network end-to-end. This approach helped train deep networks before ReLU and batch normalization were common.",
+            "Modern stacked autoencoders are trained end-to-end directly (no greedy pretraining required). Adding depth allows learning richer, more abstract representations. They are used in unsupervised pre-training, feature learning for downstream classification, and as encoders in advanced architectures."
+        ]
+        },
+
+        {
+        "tag": "cnn_overview",
+        "patterns": [
+            "What is a CNN", "What is a convolutional neural network",
+            "Explain CNN", "How does a CNN work",
+            "Why use CNN for images",
+            "What is the difference between CNN and MLP for images",
+            "What is weight sharing in CNN"
+        ],
+        "responses": [
+            "A CNN (Convolutional Neural Network) is designed for grid-like data (images, video). Convolutional layers apply learnable filters to detect local patterns (edges, textures, shapes). Pooling layers reduce spatial dimensions. Fully connected layers produce final predictions. CNNs exploit spatial locality and weight sharing.",
+            "Key CNN advantage over MLP for images: weight sharing — the same filter is applied across all spatial positions, dramatically reducing parameters and exploiting translational invariance. A 224×224 RGB image has 150k inputs; CNNs process this efficiently using filters with only hundreds of parameters.",
+            "CNN learning hierarchy: early layers detect edges/colors/textures, middle layers detect shapes/parts, deep layers detect objects/scenes. This matches how the human visual cortex processes information hierarchically. This hierarchical compositionality is why CNNs excel at computer vision tasks."
+        ]
+        },
+
+        {
+        "tag": "convolutional_layer",
+        "patterns": [
+            "What is a convolutional layer", "Explain convolution in deep learning",
+            "What is a filter in CNN", "What is a kernel in CNN",
+            "What is a feature map", "What is stride in CNN",
+            "What is padding in CNN", "How does convolution work in neural networks",
+            "What is the receptive field"
+        ],
+        "responses": [
+            "A convolutional layer slides learnable filters across the input, computing dot products at each position. Each filter detects a specific local pattern. The output is a feature map showing where that pattern was found. Multiple filters per layer create multiple feature maps (channels).",
+            "Convolution parameters: filter size (e.g., 3×3 is most common), stride (step size — stride 2 halves spatial dimensions), padding ('same' preserves spatial size, 'valid' reduces it), number of filters (determines output depth). Output size = (Input - Filter + 2·Padding) / Stride + 1.",
+            "Receptive field: the region of the input that influences a particular neuron's output. With 3×3 filters and stride 1, the receptive field grows with depth. Deeper layers 'see' larger regions of the original input, enabling detection of progressively larger and more complex patterns."
+        ]
+        },
+
+        {
+        "tag": "pooling_layer",
+        "patterns": [
+            "What is a pooling layer", "Explain pooling in CNN",
+            "What is max pooling", "What is average pooling",
+            "Why use pooling layers", "Max pooling vs average pooling",
+            "What is global average pooling"
+        ],
+        "responses": [
+            "Pooling layers reduce the spatial dimensions of feature maps. Max Pooling takes the maximum value in each window — retains the strongest activation and is most common. Average Pooling takes the mean — smoother output, used in some architectures. Both introduce no learnable parameters.",
+            "Max Pooling with 2×2 window and stride 2 halves both height and width, reducing the feature map to 25% of its size. This reduces computation, memory, and risk of overfitting, and provides slight translational invariance — small shifts in the input produce the same pooled output.",
+            "Global Average Pooling (GAP) averages each entire feature map to a single value, replacing the flatten + fully connected layers. This dramatically reduces parameters, provides strong regularization, and is used in modern architectures (ResNet, MobileNet). GAP makes the network invariant to input spatial size."
+        ]
+        },
+
+        {
+        "tag": "representation_learning",
+        "patterns": [
+            "What is representation learning", "Explain representation learning",
+            "What are distributed representations in neural networks",
+            "Local vs distributed representations",
+            "What is hierarchical compositionality",
+            "How do neural networks learn features automatically",
+            "Learned features vs hand-crafted features"
+        ],
+        "responses": [
+            "Representation learning is the ability of neural networks to automatically learn useful features (representations) from raw data — unlike traditional ML which requires manually engineered features. The learned representations capture the underlying structure of data in a compact, task-relevant way.",
+            "Distributed representations encode information across many neurons — no single neuron encodes everything; groups of neurons work together. This is more compact (N neurons can encode O(2^N) patterns) and more powerful than one-hot (local) representations. It enables meaningful generalization to unseen combinations.",
+            "Deep networks learn hierarchical representations. In vision: pixels → edges → textures → parts → objects → scenes. In speech: audio → spectral bands → formants → phones → words. In text: characters → words → phrases → sentences. This hierarchical compositionality is a core reason deep learning outperforms shallow models."
+        ]
+        },
+
+        {
+        "tag": "rnn",
+        "patterns": [
+            "What is an RNN", "What is a recurrent neural network",
+            "Explain RNN", "How does an RNN work",
+            "What is the hidden state in RNN", "RNN for sequential data",
+            "What is the vanishing gradient in RNN",
+            "RNN vs feedforward network"
+        ],
+        "responses": [
+            "An RNN (Recurrent Neural Network) processes sequential data by maintaining a hidden state that carries information from previous time steps: h_t = f(W·h_{t-1} + U·x_t + b). This allows the network to model temporal dependencies. RNNs process input one element at a time.",
+            "RNNs struggle with long-range dependencies due to the vanishing gradient problem — when backpropagating through many time steps (BPTT), gradients shrink exponentially for early time steps. This makes it hard to learn dependencies spanning many steps. LSTMs and GRUs were designed to solve this.",
+            "RNN applications: time series forecasting, speech recognition, text generation, machine translation. For short sequences, vanilla RNNs work. For long sequences, use LSTMs or GRUs. For very long sequences or complex language tasks, Transformer architectures (self-attention) now largely replace RNNs."
+        ]
+        },
+
+        {
+        "tag": "lstm",
+        "patterns": [
+            "What is an LSTM", "Explain LSTM",
+            "What is long short-term memory", "How does LSTM work",
+            "LSTM vs RNN", "What are the LSTM gates",
+            "What is the forget gate in LSTM", "What is the cell state in LSTM",
+            "When to use LSTM"
+        ],
+        "responses": [
+            "LSTM (Long Short-Term Memory) solves the RNN vanishing gradient problem with gating mechanisms. It has two states: Cell State (long-term memory) and Hidden State (short-term output). Three gates control information flow: Forget Gate (what to erase), Input Gate (what to store), Output Gate (what to output).",
+            "LSTM gates: Forget Gate (σ applied to [h_{t-1}, x_t] — decides what fraction of cell state to keep); Input Gate (σ × tanh — decides what new info to add); Output Gate (σ × tanh(cell state) — decides what to output as hidden state). The cell state acts as a conveyor belt with selective updates.",
+            "LSTMs can learn dependencies spanning hundreds of time steps. Used for: time series, speech recognition, text generation, sentiment analysis, machine translation. GRU (Gated Recurrent Unit) is a simpler LSTM variant with two gates (update + reset) — fewer parameters, often comparable performance."
+        ]
+        },
+
+        {
+        "tag": "transfer_learning",
+        "patterns": [
+            "What is transfer learning", "Explain transfer learning",
+            "What is fine tuning a neural network", "What is a pretrained model",
+            "How to use a pretrained model", "Feature extraction vs fine tuning",
+            "When to use transfer learning", "Transfer learning for small datasets"
+        ],
+        "responses": [
+            "Transfer learning uses a model pre-trained on one large task and adapts it to a new, related task. The pre-trained model has learned general features useful across tasks. This is especially powerful when your target dataset is small — you leverage knowledge from millions of training examples.",
+            "Two approaches: Feature Extraction — freeze all pre-trained layers, train only a new output head on your data (fast, good for very small datasets). Fine-tuning — unfreeze some or all layers and train them with a small learning rate on your data (more accurate, needs slightly more data).",
+            "Transfer learning workflow: (1) Select pre-trained model (ResNet for images, BERT for text); (2) Remove original output layer; (3) Add task-specific output layers; (4) Freeze early layers (general features); (5) Train new layers; (6) Optionally fine-tune deeper layers with small LR. This reduces training time and data requirements dramatically."
+        ]
+        },
+
+        {
+        "tag": "unsupervised_pretraining",
+        "patterns": [
+            "What is unsupervised pretraining", "Explain greedy layer-wise pretraining",
+            "What is pretraining a deep network with autoencoders",
+            "Why was pretraining important historically",
+            "Fine-tuning after unsupervised pretraining"
+        ],
+        "responses": [
+            "Unsupervised pretraining initializes deep network weights using unlabeled data before supervised fine-tuning. Greedy layer-wise procedure: train one autoencoder per layer (each using the previous layer's encoder output as input), then stack all encoders and fine-tune end-to-end with labels.",
+            "Pretraining initializes weights in a region of the loss surface near local optima that generalize well — nearby local optima overfit less than random initialization. This was crucial before ReLU, batch normalization, and better initializers (He, Xavier) made deep training easier.",
+            "Greedy layer-wise pretraining is less common today — modern architectures trained end-to-end with ReLU + batch normalization often match or exceed pretrained networks. However, the concept lives on in self-supervised learning: BERT (masked language modeling), SimCLR, and MAE are modern forms of unsupervised pretraining at scale."
+        ]
+        },
+
+        {
+        "tag": "ensemble_methods",
+        "patterns": [
+            "What is ensemble learning", "Explain ensemble methods",
+            "What is bagging in machine learning", "What is boosting in machine learning",
+            "Bagging vs boosting", "What is a weak learner",
+            "What is stacking in machine learning",
+            "Why do ensemble methods improve accuracy"
+        ],
+        "responses": [
+            "Ensemble methods combine multiple models for better performance than any single model. Bagging trains models in parallel on random data subsets and aggregates predictions — reduces variance. Boosting trains models sequentially, each correcting the previous one's errors — reduces bias. Both improve over a single model by leveraging diversity.",
+            "Bagging: train N models on N bootstrap samples (random samples with replacement), aggregate by voting (classification) or averaging (regression). Random Forest is the most successful bagging method. Boosting: AdaBoost focuses on misclassified points; Gradient Boosting (XGBoost, LightGBM) fits each model to the residuals.",
+            "Stacking uses a meta-model trained on the out-of-fold predictions of base models — it learns the optimal combination. Why ensembles work: diverse models make different errors that cancel when combined. The key is diversity — if all models make the same mistakes, ensembling does not help."
+        ]
+        },
+
+        {
+        "tag": "feature_selection_methods",
+        "patterns": [
+            "What is feature selection", "Explain feature selection methods",
+            "What are filter methods in feature selection",
+            "What are wrapper methods in feature selection",
+            "What are embedded methods in feature selection",
+            "What is RFE", "What is recursive feature elimination",
+            "How to select the most important features"
+        ],
+        "responses": [
+            "Feature Selection keeps a subset of original features without transforming them. Three approaches: Filter Methods (statistical criteria, fast, model-independent), Wrapper Methods (use a model to evaluate subsets — slow but accurate), Embedded Methods (selection happens during model training — best balance).",
+            "Filter Methods: Pearson Correlation (linear relationships), Mutual Information (any relationship), Chi-Square (categorical features vs target), Variance Thresholding (removes near-constant features). Fast, simple, but may miss feature interactions. Wrapper Methods (RFE, Forward Selection, Backward Elimination) are more accurate but retrain the model many times.",
+            "Embedded Methods are the most practical: Lasso (L1) automatically zeros out irrelevant features during training; Tree-based models (Random Forest, XGBoost) compute feature importance scores based on impurity reduction. These give both feature selection and model training in one step."
+        ]
+        },
+
+        {
+        "tag": "feature_selection_vs_extraction",
+        "patterns": [
+            "Feature selection vs feature extraction",
+            "Difference between feature selection and feature extraction",
+            "PCA vs feature selection", "When to use feature extraction vs selection",
+            "What is the difference between selecting and extracting features"
+        ],
+        "responses": [
+            "Feature Selection keeps a subset of the original features unchanged — they remain interpretable. For example, keeping 10 out of 100 original features. Feature Extraction creates new features as combinations of the original ones — new features may not be directly interpretable. For example, PCA components are linear combinations of all original features.",
+            "Use Feature Selection when: interpretability is important, you want to understand which original inputs matter, and many features are irrelevant (Lasso, RFE). Use Feature Extraction (PCA, autoencoders) when: features are highly correlated, you need maximum compression, or you want the most compact representation for model performance.",
+            "Feature Selection examples: Lasso removes irrelevant features, RFE recursively eliminates weak ones, tree-based importance ranks them. Feature Extraction examples: PCA creates principal components (linear), Autoencoders create latent codes (non-linear), LDA creates discriminant axes. Both reduce dimensionality but in fundamentally different ways — selection preserves original meaning, extraction creates new meaning."
+        ]
+        }
+
+    ]
+}
