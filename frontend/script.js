@@ -119,26 +119,17 @@ document.addEventListener('click', function () {
     //If it already exists: Remove it, so the menu closes
 });
 
-/*modelOptions.forEach(function (option) {
-    option.addEventListener('click', function () {
-        selectedModel = this.getAttribute('data-model'); // data-model is the attribute we set in the HTML for each option
-        localStorage.setItem('selectedModel', selectedModel);
-        updateModelSelection();
-        //When we choose the model, we save it to the local storage, and then we close the menuby removing 'open'
-        modelDropdown.classList.remove('open');
-    });
-});*/
-
 // This function finds out the option the user selected and 
 // When the user changes the Option, their previous chat is cleared.
 modelOptions.forEach(function (option) {
     option.addEventListener('click', function (e) {
         e.stopPropagation();
 
-        const newModel = this.getAttribute('data-model');
+        const newModel = this.getAttribute('data-model'); // data-model is the attribute we set in the HTML for each option
 
         if (newModel === selectedModel) {
-            modelDropdown.classList.remove('open');
+            modelDropdown.classList.remove('open'); 
+            //When we choose the model, we save it to the local storage, and then we close the menuby removing 'open'
             return;
         }
 
