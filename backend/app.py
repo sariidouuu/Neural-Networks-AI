@@ -29,8 +29,8 @@ STRICT OPERATING PROTOCOL:
 
 # We can send about 15 questions/minute and 1000/day
 model = genai.GenerativeModel(
-    model_name="gemini-2.5-flash-lite"
-    #,system_instruction=instructions
+    model_name="gemini-2.5-flash-lite",
+    system_instruction=instructions
     )
 
 @app.route('/chat', methods=['POST'])
