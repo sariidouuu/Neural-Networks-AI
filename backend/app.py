@@ -37,21 +37,41 @@ model = genai.GenerativeModel(
 def chat():
     # We take the incoming data (JSON) JavaScript sent us
     data = request.get_json()
-    user_message = data.get("message")
+
+    #user_message = data.get("message")
+    history = data.get("history", []);
 
     # If someone comes to this address (/chat), you will only serve them if they bring you a packet of data (the message). 
     # If they come empty-handed (they just wanna see the page) tell them no.
-    if not user_message:
+    if not history:
         return jsonify({"error": "No message provided"}), 400
 
     # else we try to respond:
     try:
-        # We send the prompt to gemini
-        response = model.generate_content(user_message)
-        # we return its answer to js
+        # We transform the history in a format the google ai studio needs/understands
+        gemini_history = []
+        for msg in history[:-1]:  # all, exept the last one
+            # We tell the ai to read the entire list except the last item (=the last prompt the user sent)
+            
+            # For each old message, it checks who spoke (user or model).
+            # It builts a new dictionary in a format the ai studio understands and puts it in the history.
+            role = 'user' if msg['role'] == 'user' else 'model'
+            gemini_history.append({
+                'role': role,
+                'parts': [msg['content']]
+            })
+
+        # Start a session with the history
+        chat_session = model.start_chat(history=gemini_history)
+        
+        # Send the last message and await a response
+        last_message = history[-1]['content']
+        response = chat_session.send_message(last_message)
+        
         return jsonify({"reply": response.text})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
 
 #if __name__ == '__main__':
     # The server will run topically on port 5000

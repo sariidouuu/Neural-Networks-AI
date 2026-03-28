@@ -1,6 +1,8 @@
 const chatArea    = document.getElementById('chat-area');
 const promptInput = document.getElementById('prompt-input');
 
+let chatHistory = []; //Array to store the chat history
+
 /* ────── SEND THE PROMPT ────── */
 // We use async so the chat will be able to wait for the answer
 async function handleSend() {
@@ -9,7 +11,6 @@ async function handleSend() {
     if (!text) return;
 
     addMessage(text, 'prompt');
-
     promptInput.value = '';
     promptInput.style.height = 'auto';
 
@@ -18,9 +19,16 @@ async function handleSend() {
         const response = getAIResponse(text);
         addMessage(response, 'answer');
     }, 400);*/
+
+    // We import the users prompt to the history
+    chatHistory.push({ role: 'user', content: text });
+
     // Using await the code awaits the answer from the server
     const response = await getAIResponse(text);
     addMessage(response, 'answer');
+
+    // We import the AIs answer to the history
+    chatHistory.push({ role: 'assistant', content: response });
 }
 
 
@@ -144,6 +152,7 @@ modelOptions.forEach(function (option) {
 
 function clearChat() {
     chatArea.innerHTML = '';
+    chatHistory = [];
 }
 
 //This function updates the visual selection of the model options in the dropdown menu
@@ -177,7 +186,8 @@ async function getAIResponse(userPrompt) {
                 headers: {
                     'Content-Type': 'application/json' // We inform our server that we send them the JSON file
                 },
-                body: JSON.stringify({ message: userPrompt }) // We "package" the question
+                body: JSON.stringify({ history: chatHistory}) // We "package" the history
+                    // We used message: userPrompt at first
             });
 
             // We open the answer package 
