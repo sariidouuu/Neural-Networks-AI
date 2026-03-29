@@ -49,4 +49,4 @@ Zero-Shot Learning: Capable of explaining complex concepts and technical terms n
 
 
 
-### Not usable yet
+### kinda usable
