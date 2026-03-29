@@ -35,10 +35,10 @@ The primary goal is to evaluate the performance, accuracy, and efficiency of the
 
 ## 🧠 AI Architectures Comparison
 
-# Option 1 
+## Option 1 
 This architecture leverages the power of State-of-the-Art (SOTA) Large Language Models (LLMs) via the **Google AI Studio**. Instead of local training, the system communicates with Google’s infrastructure to provide advanced reasoning and human-like responses.
 
-# 🛠️ Key Features
+## 🛠️ Key Features
 API Integration: Powered by the google-generativeai SDK using a secure API Key.
 
 System Instructions: The model is strictly constrained through System Prompts to act only as a "Neural Networks & Machine Learning Expert."
