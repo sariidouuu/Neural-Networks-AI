@@ -26,6 +26,27 @@ The primary goal is to evaluate the performance, accuracy, and efficiency of the
     * `style.css`
     * `script.js`
 * `/backend`: 
-    still figuring it out..
-  
+    * `model.py`
+    * `train.py`
+    * `nltk_utils.py`
+    * `model.pth`
+    * `intents.json`
+    * `app.py`
+
+## 🧠 AI Architectures Comparison
+
+# Option 1 
+This architecture leverages the power of State-of-the-Art (SOTA) Large Language Models (LLMs) via the **Google AI Studio**. Instead of local training, the system communicates with Google’s infrastructure to provide advanced reasoning and human-like responses.
+
+# 🛠️ Key Features
+API Integration: Powered by the google-generativeai SDK using a secure API Key.
+
+System Instructions: The model is strictly constrained through System Prompts to act only as a "Neural Networks & Machine Learning Expert."
+
+Domain Filtering: It is programmed to decline any queries unrelated to the course theory, ensuring a focused academic experience.
+
+Zero-Shot Learning: Capable of explaining complex concepts and technical terms not found in the local dataset.
+
+
+
 ### Not usable yet
