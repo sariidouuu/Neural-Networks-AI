@@ -27,8 +27,23 @@ CORS(app)
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
 # Load the traned model
-FILE = "model.pth"
+#FILE = "model.pth"
+#data = torch.load(FILE, map_location=torch.device('cpu'))
+
+# Βρίσκει τη διαδρομή του φακέλου στον οποίο βρίσκεται το app.py
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Ενώνει το μονοπάτι του φακέλου με το όνομα του αρχείου
+FILE = os.path.join(BASE_DIR, "model.pth")
+INTENTS_PATH = os.path.join(BASE_DIR, "intents.json")
+
+# Τώρα στο torch.load χρησιμοποιείς το σωστό FILE
 data = torch.load(FILE, map_location=torch.device('cpu'))
+
+# Σιγουρέψου ότι και στο άνοιγμα του intents χρησιμοποιείς το INTENTS_PATH
+with open(INTENTS_PATH, 'r', encoding='utf-8') as f:
+    intents = json.load(f)
+
 
 input_size  = data["input_size"]
 hidden_size = data["hidden_size"]
@@ -42,8 +57,8 @@ model1.load_state_dict(model_state)
 model1.eval()  # Θέτει το μοντέλο σε evaluation mode (απενεργοποιεί το dropout)
 
 # Φόρτωση intents για τις απαντήσεις
-with open('intents.json', 'r', encoding='utf-8') as f:
-    intents_data = json.load(f)
+#with open('intents.json', 'r', encoding='utf-8') as f:
+    #intents_data = json.load(f)
 
 @app.route('/chat1', methods=['POST'])
 def chat1():
