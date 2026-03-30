@@ -7,7 +7,8 @@ let chatHistory = []; //Array to store the chat history
 // We use async so the chat will be able to wait for the answer
 async function handleSend() {
     const text = promptInput.value.trim();
-    //trim: removes whitespace from both ends of a string. So if the user types only spaces, it will be considered empty and won't be sent as a prompt.
+    //trim: removes whitespace from both ends of a string. 
+    // So if the user types only spaces, it will be considered empty and won't be sent as a prompt.
     if (!text) return;
 
     addMessage(text, 'prompt');
@@ -166,13 +167,35 @@ async function getAIResponse(userPrompt) {
     
     if (selectedModel === '1') { 
         //return model1.predict(userPrompt); 
-        return "I'm sorry, can't process your request. I'm not trained yet.";
+        //return "I'm sorry, can't process your request. I'm not trained yet.";
+        
+        try {
+            //const response = await fetch('http://127.0.0.1:5000/chat1', {
+            const response = await fetch('https://neural-networks-ai.onrender.com/chat1', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: userPrompt })
+                // Option 1 does NOT need history — its a simple model that replies based on patterns recognition, not conversation
+            });
+            
+            const data = await response.json();
+            if (data.reply) {
+                return data.reply;
+            } else {
+                return "Error: " + (data.error || "Something went wrong.");
+            }
+        } catch (error) {
+            console.error("Fetch error:", error);
+            return "Connection error!";
+        }
     }
+
+
     if (selectedModel === '2') { 
         try {
             // We POST request on our local server (app.py)
-            //const response = await fetch('http://127.0.0.1:5000/chat', {
-            const response = await fetch('https://neural-networks-ai.onrender.com/chat',{
+            //const response = await fetch('http://127.0.0.1:5000/chat2', {
+            const response = await fetch('https://neural-networks-ai.onrender.com/chat2',{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json' // We inform our server that we send them the JSON file

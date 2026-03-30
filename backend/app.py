@@ -4,6 +4,14 @@ from flask_cors import CORS
 import google.generativeai as genai
 from dotenv import load_dotenv
 
+import torch
+import random
+import json
+from nltk_utils import bag_of_words, tokenize
+from model import NeuralNet
+
+# ────── TRAINDE MODEL ──────
+
 # Loading the secret api key from .env file
 load_dotenv()
 
@@ -13,6 +21,59 @@ CORS(app)
 
 # Setting up the Gemini API with our key
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+
+# Load the traned model
+FILE = "model.pth"
+data = torch.load(FILE, map_location=torch.device('cpu'))
+
+input_size  = data["input_size"]
+hidden_size = data["hidden_size"]
+output_size = data["output_size"]
+all_words   = data["all_words"]
+tags        = data["tags"]
+model_state = data["model_state"]
+
+model1 = NeuralNet(input_size, hidden_size, output_size)
+model1.load_state_dict(model_state)
+model1.eval()  # Θέτει το μοντέλο σε evaluation mode (απενεργοποιεί το dropout)
+
+# Φόρτωση intents για τις απαντήσεις
+with open('intents.json', 'r', encoding='utf-8') as f:
+    intents_data = json.load(f)
+
+@app.route('/chat1', methods=['POST'])
+def chat1():
+    data = request.get_json()
+    user_message = data.get("message", "")
+
+    if not user_message:
+        return jsonify({"error": "No message provided"}), 400
+
+    # Επεξεργασία του prompt
+    sentence     = tokenize(user_message)
+    X            = bag_of_words(sentence, all_words)
+    X            = torch.from_numpy(X).unsqueeze(0)  # προσθέτει batch dimension
+
+    # Πρόβλεψη
+    output       = model1(X)
+    _, predicted = torch.max(output, dim=1)
+    tag          = tags[predicted.item()]
+
+    # Έλεγχος confidence με softmax
+    probs       = torch.softmax(output, dim=1)
+    confidence  = probs[0][predicted.item()].item()
+
+    if confidence > 0.75:
+        # Αν είναι αρκετά σίγουρο, επίλεξε τυχαία απάντηση από το intent
+        for intent in intents_data['intents']:
+            if intent['tag'] == tag:
+                reply = random.choice(intent['responses'])
+                return jsonify({"reply": reply})
+    else:
+        return jsonify({"reply": "I'm not sure I understand. Could you rephrase?"})
+
+
+# ────── API AND STUDIO AI ──────
 
 # We choose the Google model and pass the system instructions. 
 # The restrictions we impose to google ai studio:
@@ -33,8 +94,8 @@ model = genai.GenerativeModel(
     system_instruction=instructions
     )
 
-@app.route('/chat', methods=['POST'])
-def chat():
+@app.route('/chat2', methods=['POST'])
+def chat2():
     # We take the incoming data (JSON) JavaScript sent us
     data = request.get_json()
 
@@ -73,9 +134,23 @@ def chat():
         return jsonify({"error": str(e)}), 500
     
 
+
+# ────── MAIN - PORTS ──────
+# If u wanna run the project locally you select the first main here.
+# and on script.js file you switch lines 173-174 and 197-198.
+# The live server VS code has port=5500. 
+# The backend (app.py) has port=5000. The forntend (script.js) has to send signals to the backend, so port=5000.
+# u write on terminal: cd backend -> py app.py
+# Wait until you see:
+    # * Debugger is active!
+    # * Debugger PIN:
+# then u can go live
+
+
 #if __name__ == '__main__':
     # The server will run topically on port 5000
     #app.run(debug=True, port=5000)
+
 
 if __name__ == '__main__':
     # On Render (Cloud), the port is defined automatically from the system
