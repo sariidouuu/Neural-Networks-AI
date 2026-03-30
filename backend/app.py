@@ -56,7 +56,7 @@ with torch.no_grad():
 
 # Σιγουρέψου ότι και στο άνοιγμα του intents χρησιμοποιείς το INTENTS_PATH
 with open(INTENTS_PATH, 'r', encoding='utf-8') as f:
-    intents = json.load(f)
+    intents_data = json.load(f)
 
 
 
