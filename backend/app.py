@@ -10,6 +10,10 @@ import json
 from nltk_utils import bag_of_words, tokenize
 from model import NeuralNet
 
+import nltk
+nltk.download('punkt')
+nltk.download('punkt_tab')
+
 # ────── TRAINDE MODEL ──────
 
 # Loading the secret api key from .env file
@@ -158,7 +162,7 @@ if __name__ == '__main__':
     # If we run (the code) localy and the PORT variable doesn't exists, we use 5000.
     port = int(os.environ.get("PORT", 5000))
     
-    # The host='0.0.0.0' is required for hosting (Render/Docker κτλ.)
+    # The host='0.0.0.0' is required for hosting (Render/Docker ..)
     # It allows the server to accept requests from external addresses
     # and not only from localhost (127.0.0.1) (our pc)
     app.run(host='0.0.0.0', port=port)
