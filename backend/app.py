@@ -30,6 +30,8 @@ genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 #FILE = "model.pth"
 #data = torch.load(FILE, map_location=torch.device('cpu'))
 
+
+
 # Βρίσκει τη διαδρομή του φακέλου στον οποίο βρίσκεται το app.py
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -37,12 +39,25 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 FILE = os.path.join(BASE_DIR, "model.pth")
 INTENTS_PATH = os.path.join(BASE_DIR, "intents.json")
 
+
+
+# Περιορίζει το Torch να χρησιμοποιεί μόνο 1 thread (γλιτώνει RAM/CPU overhead)
+torch.set_num_threads(1)
+
+# Όταν φορτώνεις το μοντέλο, χρησιμοποίησε το 'with torch.no_grad()' 
+# για να μην δεσμεύσει μνήμη για υπολογισμούς gradients
+with torch.no_grad():
+    data = torch.load(FILE, map_location=torch.device('cpu'), weights_only=True)
+
+
+
 # Τώρα στο torch.load χρησιμοποιείς το σωστό FILE
-data = torch.load(FILE, map_location=torch.device('cpu'))
+#data = torch.load(FILE, map_location=torch.device('cpu'))
 
 # Σιγουρέψου ότι και στο άνοιγμα του intents χρησιμοποιείς το INTENTS_PATH
 with open(INTENTS_PATH, 'r', encoding='utf-8') as f:
     intents = json.load(f)
+
 
 
 input_size  = data["input_size"]
