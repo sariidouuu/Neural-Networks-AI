@@ -9,7 +9,7 @@ class NeuralNet(nn.Module):
         self.l1 = nn.Linear(input_size, hidden_size) # input layer
         self.l2 = nn.Linear(hidden_size, hidden_size) # hidden layers
         self.l3 = nn.Linear(hidden_size, hidden_size)
-        self.l4 = nn.Linear(hidden_size, num_classes)  # output layer
+        self.l4 = nn.Linear(hidden_size, num_classes) # output layer
 
         self.relu = nn.ReLU()
         self.dropout = nn.Dropout(p=0.3)
