@@ -48,5 +48,4 @@ Domain Filtering: It is programmed to decline any queries unrelated to the cours
 Zero-Shot Learning: Capable of explaining complex concepts and technical terms not found in the local dataset.
 
 
-
 ### kinda usable
