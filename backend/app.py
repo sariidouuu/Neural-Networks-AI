@@ -31,34 +31,24 @@ genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 #data = torch.load(FILE, map_location=torch.device('cpu'))
 
 
-
-# Βρίσκει τη διαδρομή του φακέλου στον οποίο βρίσκεται το app.py
+# Finds the path of the folder where app.py is located
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Ενώνει το μονοπάτι του φακέλου με το όνομα του αρχείου
+# Joins the folder path with the file name
 FILE = os.path.join(BASE_DIR, "model.pth")
 INTENTS_PATH = os.path.join(BASE_DIR, "intents.json")
 
-
-
-# Περιορίζει το Torch να χρησιμοποιεί μόνο 1 thread (γλιτώνει RAM/CPU overhead)
+# Limits Torch to only use 1 thread (save RAM/CPU overhead)
 torch.set_num_threads(1)
 
-# Όταν φορτώνεις το μοντέλο, χρησιμοποίησε το 'with torch.no_grad()' 
-# για να μην δεσμεύσει μνήμη για υπολογισμούς gradients
+# When loading the model, use 'with torch.no_grad()' 
+# to not allocate memory for gradient calculations
 with torch.no_grad():
     data = torch.load(FILE, map_location=torch.device('cpu'), weights_only=True)
 
-
-
-# Τώρα στο torch.load χρησιμοποιείς το σωστό FILE
-#data = torch.load(FILE, map_location=torch.device('cpu'))
-
-# Σιγουρέψου ότι και στο άνοιγμα του intents χρησιμοποιείς το INTENTS_PATH
+# Make sure that when opening intents you use INTENTS_PATH
 with open(INTENTS_PATH, 'r', encoding='utf-8') as f:
     intents_data = json.load(f)
-
-
 
 input_size  = data["input_size"]
 hidden_size = data["hidden_size"]
@@ -69,9 +59,9 @@ model_state = data["model_state"]
 
 model1 = NeuralNet(input_size, hidden_size, output_size)
 model1.load_state_dict(model_state)
-model1.eval()  # Θέτει το μοντέλο σε evaluation mode (απενεργοποιεί το dropout)
+model1.eval()  # It sets the model to evaluation mode (de-activates dropout)
 
-# Φόρτωση intents για τις απαντήσεις
+# Load intentsfor the answers
 #with open('intents.json', 'r', encoding='utf-8') as f:
     #intents_data = json.load(f)
 
@@ -83,22 +73,22 @@ def chat1():
     if not user_message:
         return jsonify({"error": "No message provided"}), 400
 
-    # Επεξεργασία του prompt
+    # Processing the prompt
     sentence     = tokenize(user_message)
     X            = bag_of_words(sentence, all_words)
-    X            = torch.from_numpy(X).unsqueeze(0)  # προσθέτει batch dimension
+    X            = torch.from_numpy(X).unsqueeze(0)  # adds batch dimension
 
-    # Πρόβλεψη
+    # Prediction
     output       = model1(X)
     _, predicted = torch.max(output, dim=1)
     tag          = tags[predicted.item()]
 
-    # Έλεγχος confidence με softmax
+    # Checking the confidence with softmax
     probs       = torch.softmax(output, dim=1)
     confidence  = probs[0][predicted.item()].item()
 
     if confidence > 0.75:
-        # Αν είναι αρκετά σίγουρο, επίλεξε τυχαία απάντηση από το intent
+        #If low confidence, choose a random answer from intents
         for intent in intents_data['intents']:
             if intent['tag'] == tag:
                 reply = random.choice(intent['responses'])
