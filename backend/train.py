@@ -1,6 +1,8 @@
+import os
 import numpy as np
 import random
 import json
+import matplotlib.pyplot as plt
 
 import torch
 import torch.nn as nn
@@ -32,7 +34,37 @@ for intent in intents['intents']:
         xy.append((w, tag))
 
 # stem and lower each word
-ignore_words = ['?', '.', '!']
+ignore_words = [
+
+    # Punctuation
+    '?', '.', '!', ',', ':', ';', '-', '(', ')', '"', "'",
+
+    # Common question words — appear in nearly every pattern
+    'what', 'how', 'why', 'when', 'where', 'who', 'which', 'whose',
+
+    # Common verbs used in questions
+    'is', 'are', 'was', 'were', 'be', 'been', 'being',
+    'do', 'does', 'did', 'have', 'has', 'had',
+    'can', 'could', 'would', 'should', 'will', 'shall', 'may', 'might',
+
+    # Common articles and prepositions
+    'a', 'an', 'the', 'of', 'in', 'on', 'at', 'to', 'for',
+    'with', 'about', 'by', 'from', 'into', 'between', 'and', 'or',
+
+    # Common pronouns
+    'i', 'you', 'we', 'it', 'this', 'that', 'there', 'they',
+
+    # Common adverbs
+    'me', 'my', 'your', 'its', 'their',
+    'some', 'any', 'more', 'most', 'so', 'very', 'just', 'also',
+
+    # Common filler verbs
+    'tell', 'explain', 'describe', 'give', 'show', 'define', 'mean',
+    'get', 'use', 'make', 'know', 'understand', 'learn', 'work'
+]
+
+
+
 all_words = [stem(w) for w in all_words if w not in ignore_words] # stemming
 # remove duplicates and sort
 all_words = sorted(set(all_words))
@@ -101,6 +133,9 @@ model = NeuralNet(input_size, hidden_size, output_size).to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate) # changes the values of parameters
 
+# Creat an empty list to download the loss
+all_losses = [] 
+
 # Train the model
 for epoch in range(num_epochs):
     for (words, labels) in train_loader:
@@ -110,9 +145,6 @@ for epoch in range(num_epochs):
         # Forward pass - a prediction the model does
         outputs = model(words)
 
-        # if y would be one-hot, we must apply labels = torch.max(labels, 1)[1]
-        # cause we wouldn't hace for example the number 3, but a vector [00011]
-
         # calculates the difference between prediction and reality
         loss = criterion(outputs, labels)
         
@@ -121,6 +153,9 @@ for epoch in range(num_epochs):
         loss.backward() # calculates how the weights should change (backpropagation)
         optimizer.step() # applies the changes 
 
+    # Αποθηκεύουμε την τιμή του loss στο τέλος κάθε epoch
+    all_losses.append(loss.item())
+
     # prints in every 100 epochs    
     if (epoch+1) % 100 == 0:
         print (f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.4f}')
@@ -128,14 +163,39 @@ for epoch in range(num_epochs):
 
 print(f'final loss: {loss.item():.4f}')
 
-# A data package - a dictionary that includes the componets for the chatbot to resurrect
+# ---------------------------------------------------------
+# Creating and Saving the Loss Curve
+# ---------------------------------------------------------
+
+# Setup Output Directory
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+RESULT_DIR = os.path.join(BASE_DIR, "evaluation_results")
+#if the file does not yet exists
+if not os.path.exists(RESULT_DIR):
+    os.makedirs(RESULT_DIR)
+
+plt.figure(figsize=(8, 6))
+plt.plot(all_losses, label='Training Loss', color='blue', linewidth=2)
+plt.title('Neural Network Training Loss Curve')
+plt.xlabel('Epochs')
+plt.ylabel('Loss (CrossEntropy)')
+plt.legend()
+plt.grid(True)
+# Insteaf of plt.savefig('loss_curve.png')
+plt.savefig(os.path.join(RESULT_DIR, 'loss_curve.png'), dpi=300)
+print(f"Loss curve saved in: {RESULT_DIR}")
+print("The chart was saved as 'loss_curve.png'")
+
+# ---------------------------------------------------------
+
+# A data package - a dictionary that includes the components for the chatbot to resurrect
 data = {
     "model_state": model.state_dict(), # weights
     "input_size": input_size,
     "hidden_size": hidden_size,
     "output_size": output_size,
     "all_words": all_words, # the dictionary - vocabulary with every word the model recognizes
-    "tags": tags # a list woth every tag/intent we have on intents.json
+    "tags": tags # a list with every tag/intent we have on intents.json
 }
 
 FILE = "model.pth"
