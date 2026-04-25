@@ -116,7 +116,6 @@ STRICT OPERATING PROTOCOL:
 # We can send about 15 questions/minute and 1000/day
 model = genai.GenerativeModel(
     model_name="gemini-2.5-flash-lite", 
-    #model_name="gemini-1.5-flash",
     system_instruction=instructions
     )
 
