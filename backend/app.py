@@ -111,6 +111,7 @@ STRICT OPERATING PROTOCOL:
 6. Do not provide general information unless explicitly asked. Focus on technical details regarding MLPs, CNNs, Backpropagation, Activation Functions, and anything else strictly related to Neural Networks and Machine Learning.
 7. If you are asked to provide code, use ONLY the PyTorch or NumPy libraries.
 8. Keep your answers short and concise.
+9. Please provide your answer as plain text ONLY. Do not use bold (no asterisks), do not use bullet points, and do not use any special markdown formatting. Use only plain sentences and new lines for spacing.
 """
 
 # We can send about 15 questions/minute and 1000/day
