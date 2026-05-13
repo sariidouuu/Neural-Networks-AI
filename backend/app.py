@@ -106,7 +106,8 @@ def chat1():
     if not top_tags or sorted_probs[0].item() < 0.40:
         return jsonify({
             "reply": "I'm not sure I understand. Could you rephrase?",
-            "tags": [] # Empty tag list
+            "tags": ["out_of_distribution"] 
+            # Out-of-Distribution (OOD) Detection: The model unrestands that the prompt it received is outside the material it has been taught
         })
 
     # The first tag on the list is probably the top tag with the most confidence
