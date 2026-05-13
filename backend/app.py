@@ -80,21 +80,50 @@ def chat1():
 
     # Prediction
     output       = model1(X)
-    _, predicted = torch.max(output, dim=1)
-    tag          = tags[predicted.item()]
 
     # Checking the confidence with softmax
-    probs       = torch.softmax(output, dim=1)
-    confidence  = probs[0][predicted.item()].item()
+    # Here we convert the outputs of the neural network into probabilities (from 0 to 1). 
+    # probs now contains the probabilities for all 90 of tags.
+    probs       = torch.softmax(output, dim=1)[0]
+    # We sort the confidence in descending order
+    sorted_probs, sorted_indices = torch.sort(probs, descending=True)
+    
+    top_tags = []
+    THRESHOLD = 0.02 # We keep the tags that have above 2% propability to fit
+    MAX_TAGS = 10    # maximum 10 tags
 
-    if confidence > 0.75:
-        #If low confidence, choose a random answer from intents
-        for intent in intents_data['intents']:
-            if intent['tag'] == tag:
-                reply = random.choice(intent['responses'])
-                return jsonify({"reply": reply})
-    else:
-        return jsonify({"reply": "I'm not sure I understand. Could you rephrase?"})
+    # For loop to coolect all strong tags (can be 3, 5, or 10 etc)
+    for i in range(len(sorted_probs)):
+        if len(top_tags) >= MAX_TAGS:
+            break
+        
+        prob_value = sorted_probs[i].item() # we transform the posibility into a PyTorch (tensor) object
+        if prob_value > THRESHOLD:
+            tag_name = tags[sorted_indices[i].item()]
+            top_tags.append(tag_name)
+
+    # If the biggest propability is lower than 40%, that means that the neural understood nothing
+    if not top_tags or sorted_probs[0].item() < 0.40:
+        return jsonify({
+            "reply": "I'm not sure I understand. Could you rephrase?",
+            "tags": [] # Empty tag list
+        })
+
+    # The first tag on the list is probably the top tag with the most confidence
+    best_tag = top_tags[0]
+    reply = ""
+    
+    # we give a random answer for the best_tag
+    for intent in intents_data['intents']:
+        if intent['tag'] == best_tag:
+            reply = random.choice(intent['responses'])
+            break
+
+    # Return BOTH answer AND the list of tags in the frontend
+    return jsonify({
+        "reply": reply,
+        "tags": top_tags
+    })
 
 
 # ────── API AND STUDIO AI ──────

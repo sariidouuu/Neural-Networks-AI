@@ -26,15 +26,15 @@ async function handleSend() {
 
     // Using await the code awaits the answer from the server
     const response = await getAIResponse(text);
-    addMessage(response, 'answer');
+    addMessage(response.text, 'answer', response.tags);
 
     // We import the AIs answer to the history
-    chatHistory.push({ role: 'assistant', content: response });
+    chatHistory.push({ role: 'assistant', content: response.text });
 }
 
 
 /* ────── ADD A MESSAGE BUBBLE TO THE CHAT ────── */
-function addMessage(text, type) {
+function addMessage(text, type, tags = null ) {
 
     //create a new div element "row"
     const row = document.createElement('div');
@@ -61,6 +61,29 @@ function addMessage(text, type) {
     //We append the label and content to the bubble, then append the bubble to the row, and finally append the row to the chat area
     bubble.appendChild(label);
     bubble.appendChild(content);
+    
+    
+    // New code to include TAGS
+    // if there are tags
+    if (tags && tags.lenth > 0) {
+        const hr = document.createElement('hr'); //horizontal rule
+        hr.style.border = 'none';
+        hr.style.borderTop = '1px solid #1a4a6b';
+        hr.style.margin = '12px 0';
+
+        const tagsDiv = document.createElement('div');
+        tagsDiv.style.fontSize = '12px';
+        tagsDiv.style.color = '#7fb3d3';
+        tagsDiv.style.fontStyle = 'italic';
+
+        // join(', ') cobines the tags with ,
+        tagsDiv.innerHTML = '<strong>Tags:</strong> ' + tags.join(', ');
+        
+        bubble.appendChild(hr);
+        bubble.appendChild(tagsDiv);
+    }
+    
+    
     row.appendChild(bubble);
     chatArea.appendChild(row);
 
@@ -180,7 +203,7 @@ async function getAIResponse(userPrompt) {
             
             const data = await response.json();
             if (data.reply) {
-                return data.reply;
+                return { text: data.reply, tags: data.tags };
             } else {
                 return "Error: " + (data.error || "Something went wrong.");
             }
