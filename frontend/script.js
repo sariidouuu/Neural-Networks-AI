@@ -65,7 +65,7 @@ function addMessage(text, type, tags = null ) {
     
     // New code to include TAGS
     // if there are tags
-    if (tags && tags.lenth > 0) {
+    if (tags && tags.length > 0) {
         const hr = document.createElement('hr'); //horizontal rule
         hr.style.border = 'none';
         hr.style.borderTop = '1px solid #1a4a6b';
