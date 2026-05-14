@@ -41,7 +41,7 @@ csv_file = 'test_dataset.csv'
 try:
     df = pd.read_csv(csv_file)
 except FileNotFoundError:
-    print(f"Σφάλμα: Το αρχείο {csv_file} δεν βρέθηκε.")
+    print(f"Error: The file {csv_file} was not found.")
     exit()
 
 # Statistics and lists for Excel
@@ -88,11 +88,10 @@ for index, row in df.iterrows():
         predicted_tags = data.get("tags", [])[:10]
 
     except Exception as e:
-        print(f"Σφάλμα API στην ερώτηση {index + 1}: {e}")
+        print(f"Error API on the question {index + 1}: {e}")
         predicted_tags = ["api_error"]
 
     # Calculate Metrics
-    
     is_top1 = "NO"
     if len(predicted_tags) > 0 and predicted_tags[0] in actual_tags:
         top1_correct += 1
@@ -115,8 +114,8 @@ for index, row in df.iterrows():
     print(f"Predicted tag:   {predicted_tags}")
     print(f"Matched:  {list(matched_tags)}\n")
 
-    # Delay 4 sec
-    time.sleep(4)
+    # Delay 8 sec
+    time.sleep(8)
 
 # Added the results on a DataFramel
 df['Predicted_Tags'] = excel_predicted_tags

@@ -132,7 +132,6 @@ def chat1():
 
 @app.route('/chat2', methods=['POST'])
 def chat2():
-    # Προσωρινός κώδικας μέχρι να συνδέσουμε το BERT
     return jsonify({
         "reply": "Due to the high memory (RAM) requirements of the Transformer architecture, the BERT model is executed exclusively in the local environment, as its hardware demands exceed the constraints of the free-tier cloud hosting.",
         "tags": ["bert_building", "coming_soon"]
