@@ -42,12 +42,10 @@ total_found_tags = 0
 THRESHOLD = 0.02
 MAX_TAGS = 10
 
-# --- ΝΕΟ: Λίστες για να κρατήσουμε τα δεδομένα για τις νέες στήλες του Excel ---
 excel_predicted_tags = []
 excel_matched_tags = []
 excel_top1_match = []
 excel_row_accuracy = []
-# --------------------------------------------------------------------------------
 
 print(f"--- Evaluation begins in {total_questions} questions ---\n")
 
@@ -109,7 +107,7 @@ df['Top1_Correct'] = excel_top1_match
 df['Row_Accuracy'] = excel_row_accuracy
 
 # Save the results on the new result excel
-output_file = 'test_dataset_results.csv'
+output_file = 'test_dataset_results_bow.csv'
 df.to_csv(output_file, index=False)
 
 # Prints

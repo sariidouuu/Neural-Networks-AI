@@ -198,7 +198,7 @@ data = {
     "tags": tags # a list with every tag/intent we have on intents.json
 }
 
-FILE = "model.pth"
+FILE = "model_bow.pth"
 torch.save(data, FILE)
 
 print(f'training complete. file saved to {FILE}')

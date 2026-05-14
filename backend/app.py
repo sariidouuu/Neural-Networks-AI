@@ -35,7 +35,7 @@ genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Joins the folder path with the file name
-FILE = os.path.join(BASE_DIR, "model.pth")
+FILE = os.path.join(BASE_DIR, "model_bow.pth")
 INTENTS_PATH = os.path.join(BASE_DIR, "intents.json")
 
 # Limits Torch to only use 1 thread (save RAM/CPU overhead)
@@ -134,7 +134,7 @@ def chat1():
 def chat2():
     # Προσωρινός κώδικας μέχρι να συνδέσουμε το BERT
     return jsonify({
-        "reply": "The model BERT is under construction!", # Εδώ θα συνδέσουμε το νέο bert_model.pth.
+        "reply": "Due to the high memory (RAM) requirements of the Transformer architecture, the BERT model is executed exclusively in the local environment, as its hardware demands exceed the constraints of the free-tier cloud hosting.",
         "tags": ["bert_building", "coming_soon"]
     })
 
