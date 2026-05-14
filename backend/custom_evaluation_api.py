@@ -114,8 +114,8 @@ for index, row in df.iterrows():
     print(f"Predicted tag:   {predicted_tags}")
     print(f"Matched:  {list(matched_tags)}\n")
 
-    # Delay 8 sec
-    time.sleep(8)
+    # Delay  sec
+    time.sleep(20)
 
 # Added the results on a DataFramel
 df['Predicted_Tags'] = excel_predicted_tags
