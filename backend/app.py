@@ -14,7 +14,7 @@ import nltk
 nltk.download('punkt')
 nltk.download('punkt_tab')
 
-# ────── TRAINDE MODEL ──────
+# ────── TRAINDE MODEL using BOW ──────
 
 # Loading the secret api key from .env file
 load_dotenv()
@@ -127,6 +127,19 @@ def chat1():
     })
 
 
+
+# ────── TRAINDE MODEL using BERT ──────
+
+@app.route('/chat2', methods=['POST'])
+def chat2():
+    # Προσωρινός κώδικας μέχρι να συνδέσουμε το BERT
+    return jsonify({
+        "reply": "The model BERT is under construction!", # Εδώ θα συνδέσουμε το νέο bert_model.pth.
+        "tags": ["bert_building", "coming_soon"]
+    })
+
+
+
 # ────── API AND STUDIO AI ──────
 
 # We create a string list containing the tags, and we insert it into gemini's isntructions
@@ -164,8 +177,8 @@ model = genai.GenerativeModel(
     generation_config={"response_mime_type": "application/json"} # to mark the wanted/desired form in the gemini
     )
 
-@app.route('/chat2', methods=['POST'])
-def chat2():
+@app.route('/chat3', methods=['POST'])
+def chat3():
     # We take the incoming data (JSON) JavaScript sent us
     data = request.get_json()
 
@@ -213,7 +226,7 @@ def chat2():
 
 # ────── MAIN - PORTS ──────
 # If u wanna run the project locally you select the first main here.
-# and on script.js file you switch lines 173-174 and 197-198.
+# and on script.js file you switch lines 196-197 and 220-221.
 # The live server VS code has port=5500. 
 # The backend (app.py) has port=5000. The forntend (script.js) has to send signals to the backend, so port=5000.
 # u write on terminal: cd backend -> py app.py

@@ -216,9 +216,33 @@ async function getAIResponse(userPrompt) {
 
     if (selectedModel === '2') { 
         try {
+            const response = await fetch('http://127.0.0.1:5000/chat2', { 
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                // Στέλνουμε το κείμενο ακριβώς όπως το έγραψε ο χρήστης
+                body: JSON.stringify({ message: text }) 
+            });
+            
+            const data = await response.json();
+            
+            // Το Backend θα μας γυρίσει πάλι κείμενο απάντησης και tags
+            if (data.reply) {
+                return { text: data.reply, tags: data.tags };
+            } else {
+                return { text: "Error: " + (data.error || "Something went wrong."), tags: [] };
+            }
+        } catch (error) {
+            console.error("Fetch error:", error);
+            return { text: "Connection error with BERT API!", tags: [] };
+        }
+    }
+
+
+    if (selectedModel === '3') { 
+        try {
             // We POST request on our local server (app.py)
             //const response = await fetch('http://127.0.0.1:5000/chat2', {
-            const response = await fetch('https://neural-networks-ai.onrender.com/chat2',{
+            const response = await fetch('https://neural-networks-ai.onrender.com/chat3',{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json' // We inform our server that we send them the JSON file
