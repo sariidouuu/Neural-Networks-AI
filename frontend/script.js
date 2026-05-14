@@ -234,7 +234,7 @@ async function getAIResponse(userPrompt) {
             if (data.reply) {
                 return { text: data.reply, tags: data.tags };
             } else {
-                return "Error: " + (data.error || "SOmething went wrong with API.");
+                return { text: "Error: " + (data.error || "Something went wrong with API."), tags: [] };
             }
         } catch (error) {
             console.error("Fetch error:", error);

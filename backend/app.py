@@ -135,7 +135,7 @@ tags_list_string = ", ".join(tags)
 
 # We choose the Google model and pass the system instructions. 
 # The restrictions we impose to google ai studio:
-instructions = """
+instructions = f"""
 STRICT OPERATING PROTOCOL:
 1. You must answer ONLY in English. You may reply with: "I'm sorry but i'm only allowed to answer in English."
 2. You are the specialized assistant for Olga's bachelor thesis on "Neural Networks".
