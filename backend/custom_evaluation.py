@@ -23,12 +23,12 @@ model.load_state_dict(model_state)
 model.eval()
 
 # Loading excel
-excel_file = 'test_dataset.xlsx'
+csv_file = 'test_dataset.csv'
 try:
-    df = pd.read_excel(excel_file) 
+    df = pd.read_csv(csv_file) 
     # automatically recognizes that the first row contains the column headings (Headers)
 except FileNotFoundError:
-    print(f"Error: The file {excel_file} was not found.")
+    print(f"Error: The file {csv_file} was not found.")
     exit()
 
 # Variables for statistics
@@ -49,7 +49,7 @@ excel_top1_match = []
 excel_row_accuracy = []
 # --------------------------------------------------------------------------------
 
-print(f"--- Ξεκινάει η Αξιολόγηση σε {total_questions} ερωτήσεις ---\n")
+print(f"--- Evaluation begins in {total_questions} questions ---\n")
 
 # Evaluation Loop
 for index, row in df.iterrows():
@@ -109,8 +109,8 @@ df['Top1_Correct'] = excel_top1_match
 df['Row_Accuracy'] = excel_row_accuracy
 
 # Save the results on the new result excel
-output_file = 'test_dataset_results.xlsx'
-df.to_excel(output_file, index=False)
+output_file = 'test_dataset_results.csv'
+df.to_csv(output_file, index=False)
 
 # Prints
 print("="*40)
