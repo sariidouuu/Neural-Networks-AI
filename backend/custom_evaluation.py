@@ -51,7 +51,7 @@ excel_row_accuracy = []
 
 print(f"--- Ξεκινάει η Αξιολόγηση σε {total_questions} ερωτήσεις ---\n")
 
-# 3. Βρόχος Αξιολόγησης
+# Evaluation Loop
 for index, row in df.iterrows():
     question = row['Question']
     actual_tags_str = str(row['Actual_Tags'])
@@ -76,53 +76,51 @@ for index, row in df.iterrows():
             tag_name = tags[sorted_indices[i].item()]
             predicted_tags.append(tag_name)
 
-    # --- ΥΠΟΛΟΓΙΣΜΟΣ ΜΕΤΡΙΚΩΝ ---
+    # Calculate Metrics
     
-    # Έλεγχος Top-1
-    is_top1 = "Όχι"
+    # Check Top-1
+    is_top1 = "NO"
     if len(predicted_tags) > 0 and predicted_tags[0] in actual_tags:
         top1_correct += 1
-        is_top1 = "Ναι"
+        is_top1 = "YES"
 
-    # Έλεγχος Ταύτισης
+    # Check is they match
     matched_tags = set(actual_tags).intersection(set(predicted_tags))
     total_found_tags += len(matched_tags)
     
-    # Υπολογισμός "Ακρίβειας" (Recall) για τη συγκεκριμένη ερώτηση
+    # Recall for that specific question
     row_acc = (len(matched_tags) / len(actual_tags)) * 100 if len(actual_tags) > 0 else 0
 
-    # --- ΝΕΟ: Αποθήκευση των αποτελεσμάτων στις λίστες για το Excel ---
-    excel_predicted_tags.append(", ".join(predicted_tags)) # Ενώνει τη λίστα σε ένα string με κόμματα
+    # Save the results for later
+    excel_predicted_tags.append(", ".join(predicted_tags)) 
     excel_matched_tags.append(", ".join(list(matched_tags)))
     excel_top1_match.append(is_top1)
     excel_row_accuracy.append(f"{row_acc:.0f}%")
-    # -------------------------------------------------------------------
 
-    print(f"Ερώτηση: {question}")
-    print(f"Πραγματικά: {actual_tags}")
-    print(f"Πρόβλεψη:   {predicted_tags[:5]}... (Top 5)")
-    print(f"Ταίριαξαν:  {list(matched_tags)}\n")
+    print(f"Question: {question}")
+    print(f"Actual tag: {actual_tags}")
+    print(f"Predicted tag:   {predicted_tags[:5]}... (Top 5)")
+    print(f"Matched:  {list(matched_tags)}\n")
 
-# --- ΝΕΟ: Εισαγωγή των λιστών ως νέες στήλες στο DataFrame ---
+# Added the results on a DataFrame
 df['Predicted_Tags'] = excel_predicted_tags
 df['Matched_Tags'] = excel_matched_tags
 df['Top1_Correct'] = excel_top1_match
 df['Row_Accuracy'] = excel_row_accuracy
 
-# Αποθήκευση σε νέο αρχείο Excel
+# Save the results on the new result excel
 output_file = 'test_dataset_results.xlsx'
 df.to_excel(output_file, index=False)
-# --------------------------------------------------------------
 
-# 4. Εκτύπωση Τελικών Αποτελεσμάτων
+# Prints
 print("="*40)
-print("             ΤΕΛΙΚΑ ΑΠΟΤΕΛΕΣΜΑΤΑ")
+print("             RESULTS")
 print("="*40)
 
 top1_accuracy = (top1_correct / total_questions) * 100
 recall = (total_found_tags / total_actual_tags) * 100
 
-print(f"Ακρίβεια Πρώτης Επιλογής (Top-1 Accuracy): {top1_accuracy:.2f}%")
-print(f"Ποσοστό Εύρεσης Tags (Top-10 Recall):      {recall:.2f}%")
+print(f"Top-1 Accuracy: {top1_accuracy:.2f}%")
+print(f"Top-10 Recall:      {recall:.2f}%")
 print("="*40)
-print(f"\n✅ Τα αναλυτικά αποτελέσματα αποθηκεύτηκαν επιτυχώς στο: {output_file}")
+print(f"\n✅ The analytical results were successfully saved to: {output_file}")
