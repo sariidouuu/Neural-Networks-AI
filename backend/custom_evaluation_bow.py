@@ -8,7 +8,7 @@ from nltk_utils import bag_of_words, tokenize
 # Loading the model and the data
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-FILE = "model.pth"
+FILE = "model_bow.pth"
 data = torch.load(FILE, map_location=device)
 
 input_size = data["input_size"]

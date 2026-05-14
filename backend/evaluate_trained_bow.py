@@ -25,7 +25,7 @@ with open('intents.json', 'r', encoding='utf-8') as f:
     intents = json.load(f)
 
 # 1. Make sure the code reads the correct file the train.py produced
-FILE = "model.pth"
+FILE = "model_bow.pth"
 data = torch.load(FILE, map_location=device)
 
 input_size = data["input_size"]

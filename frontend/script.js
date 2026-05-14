@@ -220,7 +220,7 @@ async function getAIResponse(userPrompt) {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 // Στέλνουμε το κείμενο ακριβώς όπως το έγραψε ο χρήστης
-                body: JSON.stringify({ message: text }) 
+                body: JSON.stringify({ message: userPrompt }) 
             });
             
             const data = await response.json();
