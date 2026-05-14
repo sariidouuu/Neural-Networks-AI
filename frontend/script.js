@@ -216,6 +216,7 @@ async function getAIResponse(userPrompt) {
 
     if (selectedModel === '2') { 
         try {
+            //const response = await fetch('http://127.0.0.1:5000/chat2', {
             const response = await fetch('https://neural-networks-ai.onrender.com/chat2', { 
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
