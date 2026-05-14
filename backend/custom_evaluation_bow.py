@@ -112,7 +112,7 @@ df.to_csv(output_file, index=False)
 
 # Prints
 print("="*40)
-print("             RESULTS")
+print("            FINAL RESULTS (BoW)")
 print("="*40)
 
 top1_accuracy = (top1_correct / total_questions) * 100

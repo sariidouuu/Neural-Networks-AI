@@ -226,7 +226,7 @@ def chat3():
 
 # ────── MAIN - PORTS ──────
 # If u wanna run the project locally you select the first main here.
-# and on script.js file you switch lines 196-197 and 220-221.
+# and on script.js file you switch lines 196-197 and 244-245.
 # The live server VS code has port=5500. 
 # The backend (app.py) has port=5000. The forntend (script.js) has to send signals to the backend, so port=5000.
 # u write on terminal: cd backend -> py app.py
