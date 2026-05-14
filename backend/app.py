@@ -129,6 +129,10 @@ def chat1():
 
 # ────── API AND STUDIO AI ──────
 
+# We create a string list containing the tags, and we insert it into gemini's isntructions
+# so the gemini sorts the prompt based on the tags
+tags_list_string = ", ".join(tags)
+
 # We choose the Google model and pass the system instructions. 
 # The restrictions we impose to google ai studio:
 instructions = """
@@ -142,12 +146,22 @@ STRICT OPERATING PROTOCOL:
 7. If you are asked to provide code, use ONLY the PyTorch or NumPy libraries.
 8. Keep your answers short and concise.
 9. Please provide your answer as plain text ONLY. Do not use bold (no asterisks), do not use bullet points, and do not use any special markdown formatting. Use only plain sentences and new lines for spacing.
+
+ADDITIONAL TASK (TAG CLASSIFICATION):
+Below is a list of specific categories (tags): {tags_list_string}.
+For every user message, you MUST:
+1) Provide your plain text response following all rules above.
+2) Select up to 10 most relevant tags from the list above that match the user's prompt. Order them by relevance.
+3) YOU MUST respond ONLY in the following JSON format:
+{{"reply": "your_response_here", "tags": ["tag1", "tag2"]}}
+
 """
 
 # We can send about 15 questions/minute and 1000/day
 model = genai.GenerativeModel(
     model_name="gemini-2.5-flash-lite", 
-    system_instruction=instructions
+    system_instruction=instructions,
+    generation_config={"response_mime_type": "application/json"} # to mark the wanted/desired form in the gemini
     )
 
 @app.route('/chat2', methods=['POST'])
@@ -185,7 +199,13 @@ def chat2():
         last_message = history[-1]['content']
         response = chat_session.send_message(last_message)
         
-        return jsonify({"reply": response.text})
+        # since gemini now returns a json string we need to transform the answer in a Python Dictionary
+        response_data = json.loads(response.text)
+        # we return in frontend the answer and the tags:
+        return jsonify({
+            "reply": response_data.get("reply",""),
+            "tags": response_data.get("tags",[]) 
+        })
     except Exception as e:
         return jsonify({"error": str(e)}), 500
     

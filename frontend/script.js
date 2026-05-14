@@ -232,7 +232,7 @@ async function getAIResponse(userPrompt) {
 
             // If the server sent us back the "reply", we return it to the chat
             if (data.reply) {
-                return data.reply;
+                return { text: data.reply, tags: data.tags };
             } else {
                 return "Error: " + (data.error || "SOmething went wrong with API.");
             }
