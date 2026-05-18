@@ -56,7 +56,7 @@ excel_top1_match = []
 excel_row_accuracy = []
 
 print(f"--- Evaluation for Gemini API begins in {total_questions} questions ---")
-print("This will take about 3-4 minutes (due to delays to avoid API limits)...\n")
+print("This will take about 20 minutes (due to delays to avoid API limits)...\n")
 
 # Evaluation Loop
 for index, row in df.iterrows():
@@ -115,7 +115,7 @@ for index, row in df.iterrows():
     print(f"Matched:  {list(matched_tags)}\n")
 
     # Delay  sec
-    time.sleep(20)
+    time.sleep(30)
 
 # Added the results on a DataFramel
 df['Predicted_Tags'] = excel_predicted_tags
