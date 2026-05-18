@@ -5,53 +5,50 @@ import torch.nn as nn
 import matplotlib.pyplot as plt
 from torch.utils.data import Dataset, DataLoader
 
-# ΝΕΟ: Εισαγωγή της βιβλιοθήκης για το BERT
 from sentence_transformers import SentenceTransformer
-
-# Εισαγωγή του ίδιου Νευρωνικού Δικτύου!
 from model import NeuralNet
 
-# 1. Φόρτωση του προ-εκπαιδευμένου BERT (all-MiniLM-L6-v2)
-# Την πρώτη φορά που θα τρέξει, θα κατεβάσει περίπου 80MB από το ίντερνετ
-print("Φόρτωση του BERT μοντέλου... (Μπορεί να πάρει λίγα δευτερόλεπτα)")
+# Load a pre-trained mini BERT model (all-MiniLM-L6-v2)
+# First time it will run, it will download about 80MB from the internet
+print("Loading BERT model... (May take a few seconds)")
 bert_model = SentenceTransformer('all-MiniLM-L6-v2')
-print("Το BERT φορτώθηκε επιτυχώς!")
+print("BERT was loaded succefully!")
 
-# 2. Φόρτωση των Intents
+# Load Intents
 with open('intents.json', 'r', encoding='utf-8') as f:
     intents = json.load(f)
 
 tags = []
 xy = []
 
-# Μαζεύουμε τα tags και τα patterns
+# Gather tags and patterns
 for intent in intents['intents']:
     tag = intent['tag']
     tags.append(tag)
     for pattern in intent['patterns']:
         xy.append((pattern, tag))
 
-# Αφαιρούμε τα διπλότυπα tags και τα κάνουμε αλφαβητική λίστα
+# Remove duplicate tags and make them an alphabetical list
 tags = sorted(set(tags))
 
-# 3. Προετοιμασία Δεδομένων (Embeddings)
-print("Μετατροπή των προτάσεων σε διανύσματα (Embeddings)...")
+# EMBEDDING DATA
+print("Transform sentences into vectors (Embeddings)...")
 X_train = []
 y_train = []
 
 for (pattern, tag) in xy:
-    # ΕΔΩ ΓΙΝΕΤΑΙ Η ΜΑΓΕΙΑ: Το BERT μετατρέπει το κείμενο σε 384 αριθμούς (διάνυσμα)
+    # BERT transform the text in 384 numbers (a vector)
     embedding = bert_model.encode(pattern)
     X_train.append(embedding)
     
-    # Βρίσκουμε τον αριθμό του tag (π.χ. το 'greeting' είναι το 0, το 'cnn' είναι το 5)
+    # Find the number of the tag ('greeting' is 0,'cnn' is 5)
     label = tags.index(tag)
     y_train.append(label)
 
 X_train = torch.tensor(X_train, dtype=torch.float32)
 y_train = torch.tensor(y_train, dtype=torch.long)
 
-# 4. Δημιουργία PyTorch Dataset
+# Create a PyTorch Dataset
 class ChatDataset(Dataset):
     def __init__(self):
         self.n_samples = len(X_train)
@@ -64,29 +61,32 @@ class ChatDataset(Dataset):
     def __len__(self):
         return self.n_samples
 
-# 5. Hyperparameters (Παράμετροι Εκπαίδευσης)
+# Hyperparameters (for training)
 batch_size = 8
 hidden_size = 128
 output_size = len(tags)
-# Το input_size είναι ΠΑΝΤΑ 384 για το all-MiniLM-L6-v2!
+# input_size is ALWAYS 384 for all-MiniLM-L6-v2
 input_size = 384 
 learning_rate = 0.001
-num_epochs = 200 # Το BERT μαθαίνει γρήγορα, ίσως χρειαστούν λιγότερες εποχές
+num_epochs = 200 # BERT learns faster, maybe there will be needed less epochs
 
 dataset = ChatDataset()
 train_loader = DataLoader(dataset=dataset, batch_size=batch_size, shuffle=True, num_workers=0)
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-# Αρχικοποίηση του μοντέλου (ίδιο με το BoW!)
+# Initialize the model (same as BoW!)
 model = NeuralNet(input_size, hidden_size, output_size).to(device)
 
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
-# 6. Εκπαίδευση του Νευρωνικού Δικτύου
-print("Ξεκινάει η εκπαίδευση του Classifier πάνω στα διανύσματα του BERT...")
+# Training the model
+print("Classifier training begins on BERT vectors...")
 all_losses = []
+
+# We define the limit that satisfies us
+target_loss = 0.01
 
 for epoch in range(num_epochs):
     for (words, labels) in train_loader:
@@ -103,14 +103,22 @@ for epoch in range(num_epochs):
         optimizer.step()
         
     all_losses.append(loss.item())
+
     if (epoch+1) % 20 == 0:
         print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.4f}')
 
+    # EARLY STOPPING: if the error is less than 0.01 we stop
+    if loss.item() < target_loss:
+        print(f"\n⚠️ Early Stopping: Training stopped earlier in the epoch {epoch+1}!")
+        print(f"The network reached the desired error ({loss.item():.4f}).")
+        break # break to break the for loop
+
 print(f'Τελικό Loss: {loss.item():.4f}')
 
-# 7. Αποθήκευση Γραφήματος Loss
+
+# LOSS CURVE
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-RESULT_DIR = os.path.join(BASE_DIR, "evaluation_results")
+RESULT_DIR = os.path.join(BASE_DIR, "evaluation_results_bert")
 if not os.path.exists(RESULT_DIR):
     os.makedirs(RESULT_DIR)
 
@@ -123,8 +131,9 @@ plt.legend()
 plt.grid(True)
 plt.savefig(os.path.join(RESULT_DIR, 'loss_curve_bert.png'), dpi=300)
 
-# 8. Αποθήκευση του Μοντέλου
-# Προσοχή: Δεν αποθηκεύουμε το "all_words" γιατί πλέον δεν υπάρχει λεξιλόγιο!
+
+# Save the model
+# Attention: We do NOT save "all_words" cause there is NO dictionary
 data = {
     "model_state": model.state_dict(),
     "input_size": input_size,

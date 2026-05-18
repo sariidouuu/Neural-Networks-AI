@@ -193,8 +193,8 @@ async function getAIResponse(userPrompt) {
         //return "I'm sorry, can't process your request. I'm not trained yet.";
         
         try {
-            //const response = await fetch('http://127.0.0.1:5000/chat1', {
-            const response = await fetch('https://neural-networks-ai.onrender.com/chat1', {
+            const response = await fetch('http://127.0.0.1:5000/chat1', {
+            //const response = await fetch('https://neural-networks-ai.onrender.com/chat1', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message: userPrompt })
@@ -216,8 +216,8 @@ async function getAIResponse(userPrompt) {
 
     if (selectedModel === '2') { 
         try {
-            //const response = await fetch('http://127.0.0.1:5000/chat2', {
-            const response = await fetch('https://neural-networks-ai.onrender.com/chat2', { 
+            const response = await fetch('http://127.0.0.1:5000/chat2', {
+            //const response = await fetch('https://neural-networks-ai.onrender.com/chat2', { 
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 // Στέλνουμε το κείμενο ακριβώς όπως το έγραψε ο χρήστης
@@ -242,8 +242,8 @@ async function getAIResponse(userPrompt) {
     if (selectedModel === '3') { 
         try {
             // We POST request on our local server (app.py)
-            //const response = await fetch('http://127.0.0.1:5000/chat2', {
-            const response = await fetch('https://neural-networks-ai.onrender.com/chat3',{
+            const response = await fetch('http://127.0.0.1:5000/chat2', {
+            //const response = await fetch('https://neural-networks-ai.onrender.com/chat3',{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json' // We inform our server that we send them the JSON file

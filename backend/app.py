@@ -235,18 +235,18 @@ def chat3():
 # then u can go live
 
 
-#if __name__ == '__main__':
-    # The server will run topically on port 5000
-    #app.run(debug=True, port=5000)
-
-
 if __name__ == '__main__':
+    # The server will run topically on port 5000
+    app.run(debug=True, port=5000)
+
+
+#if __name__ == '__main__':
     # On Render (Cloud), the port is defined automatically from the system
     # The os.environ.get("PORT") reads this port
     # If we run (the code) localy and the PORT variable doesn't exists, we use 5000.
-    port = int(os.environ.get("PORT", 5000))
+    #port = int(os.environ.get("PORT", 5000))
     
     # The host='0.0.0.0' is required for hosting (Render/Docker ..)
     # It allows the server to accept requests from external addresses
     # and not only from localhost (127.0.0.1) (our pc)
-    app.run(host='0.0.0.0', port=port)
+    #app.run(host='0.0.0.0', port=port)

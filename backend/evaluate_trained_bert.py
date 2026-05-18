@@ -5,36 +5,40 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import classification_report, confusion_matrix
+from sentence_transformers import SentenceTransformer
 
 from model import NeuralNet
-from nltk_utils import bag_of_words, tokenize
 
 # Set the device ( GPU -if exists- or CPU)
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Setup Output Directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-RESULTS_DIR = os.path.join(BASE_DIR, "evaluation_results_bow")
+RESULTS_DIR = os.path.join(BASE_DIR, "evaluation_results_bert")
 
 # Creates the folder if it doesn't exist
 if not os.path.exists(RESULTS_DIR):
     os.makedirs(RESULTS_DIR)
 
-# 1. Loading data (intents) and  model
+# 1. Loading data
 with open('intents.json', 'r', encoding='utf-8') as f:
     intents = json.load(f)
 
-FILE = "model_bow.pth"
-data = torch.load(FILE, map_location=device)
+# Loading the trained BERT model data
+FILE = "model_bert.pth"
+data = torch.load(FILE, map_location=device, weights_only=True)
 
 input_size = data["input_size"]
 hidden_size = data["hidden_size"]
 output_size = data["output_size"]
-all_words = data['all_words']
 tags = data['tags']
 model_state = data["model_state"]
 
-# 2. Setting the model in evaluation mode (eval)
+# 2. Loading BERT & Model
+print("Loading BERTT Model...")
+bert_model = SentenceTransformer('all-MiniLM-L6-v2')
+
+# Setting the model in evaluation mode (eval)
 model = NeuralNet(input_size, hidden_size, output_size).to(device)
 model.load_state_dict(model_state)
 model.eval()
@@ -44,14 +48,13 @@ y_true = []
 y_pred = []
 
 # 3. load all intents from the model to see what it predictes
-print("Evaluation of the model. Please wait...")
+print("Evaluation of the BERT model. Please wait...")
 for intent in intents['intents']:
     tag = intent['tag']
     for pattern in intent['patterns']:
-        w = tokenize(pattern)
-        X = bag_of_words(w, all_words)
-        X = X.reshape(1, X.shape[0])
-        X = torch.from_numpy(X).to(device)
+        # Instead of a bag_of_words, we use the 'encode' from BERT
+        X = bert_model.encode(pattern)
+        X = torch.from_numpy(X).unsqueeze(0).to(torch.float32).to(device)
 
         output = model(X)
         _, predicted = torch.max(output, dim=1)
@@ -61,13 +64,13 @@ for intent in intents['intents']:
 
 # 4. Creating Text Report and extract metrics
 print("\n" + "="*80)
-print(" METRICS ")
+print(" METRICS (BERT) ")
 print("="*80)
 
-# Prnts in terminal and store in txt
+# Prints in terminal and store in txt
 report_text = classification_report(y_true, y_pred, target_names=tags)
 print(report_text)
-report_path = os.path.join(RESULTS_DIR, "metrics_report_bow.txt")
+report_path = os.path.join(RESULTS_DIR, "metrics_report_bert.txt")
 with open(report_path, "w", encoding='utf-8') as f:
     f.write(report_text)
 
@@ -84,14 +87,14 @@ macro_f1 = report_dict['macro avg']['f1-score']
 # ---------------------------------------------------------
 metrics_names = ['Accuracy', 'Precision', 'Recall', 'F1-Score']
 metrics_values = [accuracy, macro_precision, macro_recall, macro_f1]
-colors = ['#4CAF50', '#2196F3', '#FFC107', '#F44336'] 
+colors = ['#4CAF50', '#2196F3', '#FFC107', '#F44336']
 
 plt.figure(figsize=(8, 6))
 bars = plt.bar(metrics_names, metrics_values, color=colors, edgecolor='black')
 
 # settings of Bar Chart
-plt.ylim(0, 1.1) # The limit goes up to 1.1 to fit the numbers above the bars.
-plt.title('Overall Metrics', fontsize=14)
+plt.ylim(0, 1.1)
+plt.title('Overall Metrics (BERT)', fontsize=14)
 plt.ylabel('Score (0.0 to 1.0)', fontsize=12)
 plt.grid(axis='y', linestyle='--', alpha=0.7)
 
@@ -102,8 +105,8 @@ for bar in bars:
             ha='center', va='bottom', fontweight='bold', fontsize=11)
 
 plt.tight_layout()
-plt.savefig(os.path.join(RESULTS_DIR, 'metrics_barchart_bow.png'), dpi=300)
-plt.close() # We close the graph so that it does not get confused with the next one
+plt.savefig(os.path.join(RESULTS_DIR, 'metrics_barchart_bert.png'), dpi=300)
+plt.close()
 
 # ---------------------------------------------------------
 # CHART 2: Confusion Matrix (Full and Errors-Only)
@@ -111,24 +114,19 @@ plt.close() # We close the graph so that it does not get confused with the next 
 cm = confusion_matrix(y_true, y_pred)
 
 # --- 2a. FULL Confusion Matrix ---
-plt.figure(figsize=(16, 14)) # Large size to accommodate many intents
-sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', 
-            xticklabels=tags, yticklabels=tags)
-
-plt.title('Full Confusion Matrix (All Intents)', fontsize=16)
+plt.figure(figsize=(16, 14))
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=tags, yticklabels=tags)
+plt.title('Full Confusion Matrix (BERT)', fontsize=16)
 plt.ylabel('True Label', fontsize=12)
 plt.xlabel('Predicted Label', fontsize=12)
 plt.xticks(rotation=45, ha='right', fontsize=8)
 plt.yticks(fontsize=8)
 plt.tight_layout()
-
-plt.savefig(os.path.join(RESULTS_DIR, 'confusion_matrix_full_bow.png'), dpi=300)
+plt.savefig(os.path.join(RESULTS_DIR, 'confusion_matrix_full_bert.png'), dpi=300)
 plt.close()
-print("Saved 'confusion_matrix_full_bow.png'")
-
+print("Saved 'confusion_matrix_full_bert.png'")
 
 # --- 2b. ERRORS-ONLY Confusion Matrix ---
-# Find which intents had at least one misclassification
 error_indices = set()
 for t, p in zip(y_true, y_pred):
     if t != p: 
@@ -138,7 +136,6 @@ for t, p in zip(y_true, y_pred):
 error_indices = sorted(list(error_indices))
 
 if len(error_indices) > 0:
-    # Slice the matrix to keep only rows and columns with errors
     sub_cm = cm[np.ix_(error_indices, error_indices)]
     sub_tags = [tags[i] for i in error_indices]
 
@@ -146,22 +143,21 @@ if len(error_indices) > 0:
     sns.heatmap(sub_cm, annot=True, fmt='d', cmap='Reds', 
                 xticklabels=sub_tags, yticklabels=sub_tags)
 
-    plt.title('Confusion Matrix (Focus on Errors)', fontsize=14)
+    plt.title('Confusion Matrix (Focus on Errors - BERT)', fontsize=14)
     plt.ylabel('True Label', fontsize=12)
     plt.xlabel('Predicted Label', fontsize=12)
     plt.xticks(rotation=45, ha='right', fontsize=10)
     plt.yticks(fontsize=10)
     plt.tight_layout()
 
-    plt.savefig(os.path.join(RESULTS_DIR, 'confusion_matrix_errors_bow.png'), dpi=300)
+    plt.savefig(os.path.join(RESULTS_DIR, 'confusion_matrix_errors_bert.png'), dpi=300)
     plt.close()
-    print("Saved 'confusion_matrix_errors_bow.png'")
+    print("Saved 'confusion_matrix_errors_bert.png'")
 else:
-    print("No errors found! 'confusion_matrix_errors_bow.png' was not created.")
+    print("No errors found! 'confusion_matrix_errors_bert.png' was not created. (BERT scored 100% on training data!)")
 
-
-print("\nSUCCESS! All evaluation files were saved in: {RESULTS_DIR}")
-print("1. metrics_report_bow.txt (Detailed classification report)")
-print("2. metrics_barchart_bow.png (Bar chart of overall metrics)")
-print("3. confusion_matrix_full_bow.png (Heatmap of the full confusion matrix)")
-print("4. confusion_matrix_errors_bow.png (Heatmap focusing only on misclassifications)")
+print(f"\nSUCCESS! All evaluation files were saved in: {RESULTS_DIR}")
+print("1. metrics_report_bert.txt (Detailed classification report)")
+print("2. metrics_barchart_bert.png (Bar chart of overall metrics)")
+print("3. confusion_matrix_full_bert.png (Heatmap of the full confusion matrix)")
+print("4. confusion_matrix_errors_bert.png (Heatmap focusing only on misclassifications)")

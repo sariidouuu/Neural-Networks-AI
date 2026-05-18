@@ -169,7 +169,7 @@ print(f'final loss: {loss.item():.4f}')
 
 # Setup Output Directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-RESULT_DIR = os.path.join(BASE_DIR, "evaluation_results")
+RESULT_DIR = os.path.join(BASE_DIR, "evaluation_results_bow")
 #if the file does not yet exists
 if not os.path.exists(RESULT_DIR):
     os.makedirs(RESULT_DIR)
@@ -182,9 +182,9 @@ plt.ylabel('Loss (CrossEntropy)')
 plt.legend()
 plt.grid(True)
 # Insteaf of plt.savefig('loss_curve.png')
-plt.savefig(os.path.join(RESULT_DIR, 'loss_curve.png'), dpi=300)
+plt.savefig(os.path.join(RESULT_DIR, 'loss_curve_bow.png'), dpi=300)
 print(f"Loss curve saved in: {RESULT_DIR}")
-print("The chart was saved as 'loss_curve.png'")
+print("The chart was saved as 'loss_curve_bow.png'")
 
 # ---------------------------------------------------------
 
