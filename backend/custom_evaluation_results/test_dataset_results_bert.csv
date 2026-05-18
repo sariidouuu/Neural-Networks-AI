@@ -1,0 +1,46 @@
+,Question,Actual_Tags,Predicted_Tags,Matched_Tags,Top1_Correct,Row_Accuracy
+1,"If I have data without any labels, what kind of machine learning should I use?",supervised_vs_unsupervised,"data_preprocessing, missing_values, one_hot_encoding, softmax",,NO,0%
+2,Which algorithm classifies a point based on the majority vote of its closest neighbors?,knn,"kmeans, knn, davies_bouldin_calinski, data_preprocessing",knn,NO,100%
+3,How does a model split data at nodes using Gini impurity?,decision_tree,generalization,,NO,0%
+4,What algorithm builds multiple decision trees using bagging?,"random_forest, ensemble_methods","random_forest, decision_tree",random_forest,YES,50%
+5,Which linear model is used to predict probabilities for binary classification?,logistic_regression,"lasso_regression, naive_bayes, logistic_regression",logistic_regression,NO,100%
+6,What model maximizes the margin between different classes?,svm,"imbalanced_data, data_preprocessing",,NO,0%
+7,How can I fit a straight line to predict a continuous value?,linear_regression,"parametric_vs_nonparametric, linear_regression",linear_regression,NO,100%
+8,Which regression uses an L2 penalty to prevent large coefficients?,"ridge_regression, l2_regularization","ridge_regression, linear_regression, r_squared",ridge_regression,YES,50%
+9,What is a popular gradient boosting framework for tabular data?,"xgboost, ensemble_methods","gradient_exploding, gradient_descent, neural_network_pytorch, learning_rate_schedule",,NO,0%
+10,How do I group my data into K distinct spherical clusters?,kmeans,kmeans,kmeans,YES,100%
+11,Which clustering method finds dense regions and ignores outliers?,dbscan,dbscan,dbscan,YES,100%
+12,Why is my training loss near zero but validation loss is very high?,overfitting,"training_process, gradient_exploding, f1_score",,NO,0%
+13,What is the problem when my model is too simple to learn the data?,underfitting,"generalization, transfer_learning",,NO,0%
+14,Which regularization method can force some weights to become exactly zero?,"l1_regularization, feature_selection_methods","l2_regularization, weight_initialization, l1_regularization",l1_regularization,NO,50%
+15,Why do we randomly turn off neurons during training?,dropout,"adam_optimizer, neural_network_pytorch, backpropagation, early_stopping",,NO,0%
+16,What metric simply counts the total number of correct predictions?,accuracy_metric,"davies_bouldin_calinski, silhouette_score, pooling_layer",,NO,0%
+17,How do I measure the percentage of correct positive predictions to minimize false alarms?,precision_metric,"confusion_matrix_extended, confusion_matrix",,NO,0%
+18,Which metric is best when missing a positive case is very dangerous?,recall_metric,"mae_metric, confusion_matrix, missing_values, silhouette_score, recall_metric, confusion_matrix_extended",recall_metric,NO,100%
+19,What is the harmonic mean of precision and recall?,f1_score,recall_metric,,NO,0%
+20,"Which loss function squares the errors, heavily penalizing large mistakes?","mse_metric, loss_functions","loss_functions, dropout, gradient_descent",loss_functions,YES,50%
+21,"How can I see a table of true positives, false positives, true negatives, and false negatives?",confusion_matrix,confusion_matrix,confusion_matrix,YES,100%
+22,Why should I split my data into multiple folds for testing?,cross_validation,"data_preprocessing, imbalanced_data",,NO,0%
+23,Do I need to standardize or normalize my inputs before using algorithms?,"feature_scaling, data_preprocessing","weight_initialization, feature_scaling, data_preprocessing, sigmoid_activation","feature_scaling, data_preprocessing",NO,100%
+24,How do I convert text categories like 'red' and 'blue' into binary numbers?,"one_hot_encoding, data_preprocessing",data_preprocessing,data_preprocessing,YES,50%
+25,"My dataset has 99% normal transactions and 1% fraud, what should I do?",imbalanced_data,"silhouette_score, imbalanced_data, data_preprocessing, logistic_regression",imbalanced_data,NO,100%
+26,Which technique reduces dimensions by finding the directions of maximum variance?,pca,"knn, convolutional_layer, pca, cnn_overview, lle, kernel_trick",pca,NO,100%
+27,What algorithm is best for visualizing high-dimensional data clusters in 2D?,tsne,"kmeans, agglomerative_clustering",,NO,0%
+28,What are the hidden layers in an artificial neural network?,neural_network_basics,neural_network_basics,neural_network_basics,YES,100%
+29,Which activation function outputs zero for negative numbers and the input itself for positive numbers?,relu,"sigmoid_activation, tanh_activation, feature_scaling, batch_normalization",,NO,0%
+30,"Which function squashes values between 0 and 1, often used in output layers?",sigmoid_activation,"feature_scaling, parametric_vs_nonparametric, kmeans",,NO,0%
+31,How do I turn raw network outputs into a probability distribution that sums to 1?,softmax,sigmoid_activation,,NO,0%
+32,How does the network calculate gradients from the output back to the inputs?,backpropagation,"backpropagation, rnn",backpropagation,YES,100%
+33,What algorithm takes steps in the opposite direction of the gradient to find the minimum loss?,gradient_descent,"loss_functions, gradient_descent",gradient_descent,NO,100%
+34,Which optimizer uses both momentum and adaptive learning rates?,adam_optimizer,"gradient_descent, learning_rate_schedule, perceptron",,NO,0%
+35,What mathematical function measures how wrong the neural network's predictions are?,loss_functions,"early_stopping, training_process, gradient_exploding, r_squared",,NO,0%
+36,How can I standardize the inputs of hidden layers to make training faster?,batch_normalization,"adam_optimizer, transfer_learning, backpropagation, mlp_vs_cnn_vs_rnn, unsupervised_pretraining, generalization, stacked_autoencoder, weight_initialization, neural_network_basics",,NO,0%
+37,Should I halt training when the validation error stops improving?,early_stopping,training_process,,NO,0%
+38,What network compresses data into a bottleneck and tries to reconstruct it?,autoencoder_basics,"generalization, transfer_learning, adam_optimizer, weight_initialization, mlp_vs_cnn_vs_rnn, data_preprocessing",,NO,0%
+39,Which architecture is best suited for recognizing objects in images?,cnn_overview,"mlp_vs_cnn_vs_rnn, cnn_overview, neural_network_basics, variational_autoencoder, convolutional_layer, tsne, representation_learning, weight_initialization",cnn_overview,NO,100%
+40,What layer uses sliding filters to detect edges and textures?,convolutional_layer,"tsne, convolutional_layer, isomap",convolutional_layer,NO,100%
+41,How can I downsample my feature maps to reduce computation in a CNN?,pooling_layer,"residual_networks, mlp_vs_cnn_vs_rnn, rnn",,NO,0%
+42,Which network has a hidden state to process sequences and time series?,rnn,rnn,rnn,YES,100%
+43,"Which architecture uses input, forget, and output gates to remember long sequences?",lstm,"rnn, lstm",lstm,NO,100%
+44,Can I take a model trained by Google and fine-tune it on my small dataset?,transfer_learning,"hyperparameter_tuning, transfer_learning",transfer_learning,NO,100%
+45,What are skip connections and why do they help train very deep networks?,residual_networks,"rnn, lstm, dropout, sigmoid_activation",,NO,0%
