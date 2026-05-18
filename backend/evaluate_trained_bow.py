@@ -14,7 +14,7 @@ device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 # Setup Output Directory
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-RESULTS_DIR = os.path.join(BASE_DIR, "evaluation_results")
+RESULTS_DIR = os.path.join(BASE_DIR, "evaluation_results_bow")
 
 # Creates the folder if it doesn't exist
 if not os.path.exists(RESULTS_DIR):
@@ -24,7 +24,6 @@ if not os.path.exists(RESULTS_DIR):
 with open('intents.json', 'r', encoding='utf-8') as f:
     intents = json.load(f)
 
-# 1. Make sure the code reads the correct file the train.py produced
 FILE = "model_bow.pth"
 data = torch.load(FILE, map_location=device)
 
@@ -68,7 +67,7 @@ print("="*80)
 # Prnts in terminal and store in txt
 report_text = classification_report(y_true, y_pred, target_names=tags)
 print(report_text)
-report_path = os.path.join(RESULTS_DIR, "metrics_report.txt")
+report_path = os.path.join(RESULTS_DIR, "metrics_report_bow.txt")
 with open(report_path, "w", encoding='utf-8') as f:
     f.write(report_text)
 
@@ -85,7 +84,7 @@ macro_f1 = report_dict['macro avg']['f1-score']
 # ---------------------------------------------------------
 metrics_names = ['Accuracy', 'Precision', 'Recall', 'F1-Score']
 metrics_values = [accuracy, macro_precision, macro_recall, macro_f1]
-colors = ['#4CAF50', '#2196F3', '#FFC107', '#F44336'] # Πράσινο, Μπλε, Κίτρινο, Κόκκινο
+colors = ['#4CAF50', '#2196F3', '#FFC107', '#F44336'] 
 
 plt.figure(figsize=(8, 6))
 bars = plt.bar(metrics_names, metrics_values, color=colors, edgecolor='black')
@@ -103,7 +102,7 @@ for bar in bars:
             ha='center', va='bottom', fontweight='bold', fontsize=11)
 
 plt.tight_layout()
-plt.savefig(os.path.join(RESULTS_DIR, 'metrics_barchart.png'), dpi=300)
+plt.savefig(os.path.join(RESULTS_DIR, 'metrics_barchart_bow.png'), dpi=300)
 plt.close() # We close the graph so that it does not get confused with the next one
 
 # ---------------------------------------------------------
@@ -123,9 +122,9 @@ plt.xticks(rotation=45, ha='right', fontsize=8)
 plt.yticks(fontsize=8)
 plt.tight_layout()
 
-plt.savefig(os.path.join(RESULTS_DIR, 'confusion_matrix_full.png'), dpi=300)
+plt.savefig(os.path.join(RESULTS_DIR, 'confusion_matrix_full_bow.png'), dpi=300)
 plt.close()
-print("Saved 'confusion_matrix_full.png'")
+print("Saved 'confusion_matrix_full_bow.png'")
 
 
 # --- 2b. ERRORS-ONLY Confusion Matrix ---
@@ -154,15 +153,15 @@ if len(error_indices) > 0:
     plt.yticks(fontsize=10)
     plt.tight_layout()
 
-    plt.savefig(os.path.join(RESULTS_DIR, 'confusion_matrix_errors.png'), dpi=300)
+    plt.savefig(os.path.join(RESULTS_DIR, 'confusion_matrix_errors_bow.png'), dpi=300)
     plt.close()
-    print("Saved 'confusion_matrix_errors.png'")
+    print("Saved 'confusion_matrix_errors_bow.png'")
 else:
-    print("No errors found! 'confusion_matrix_errors.png' was not created.")
+    print("No errors found! 'confusion_matrix_errors_bow.png' was not created.")
 
 
 print("\nSUCCESS! All evaluation files were saved in: {RESULTS_DIR}")
-print("1. metrics_report.txt (Detailed classification report)")
-print("2. metrics_barchart.png (Bar chart of overall metrics)")
-print("3. confusion_matrix_full.png (Heatmap of the full confusion matrix)")
-print("4. confusion_matrix_errors.png (Heatmap focusing only on misclassifications)")
+print("1. metrics_report_bow.txt (Detailed classification report)")
+print("2. metrics_barchart_bow.png (Bar chart of overall metrics)")
+print("3. confusion_matrix_full_bow.png (Heatmap of the full confusion matrix)")
+print("4. confusion_matrix_errors_bow.png (Heatmap focusing only on misclassifications)")

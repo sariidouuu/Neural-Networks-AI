@@ -107,7 +107,15 @@ df['Top1_Correct'] = excel_top1_match
 df['Row_Accuracy'] = excel_row_accuracy
 
 # Save the results on the new result excel
+# Setup Output Directory
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+RESULTS_DIR = os.path.join(BASE_DIR, "custom_evaluation_results")
+
+if not os.path.exists(RESULTS_DIR):
+    os.makedirs(RESULTS_DIR)
+
 output_file = 'test_dataset_results_bow.csv'
+output_path = os.path.join(RESULTS_DIR, output_file)
 df.to_csv(output_file, index=False)
 
 # Prints
